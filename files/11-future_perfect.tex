@@ -1,0 +1,380 @@
+% ============================================================
+% ENGLISH TENSES — FUTURE PERFECT
+% Version graphique LaTeX/TikZ
+% Compilation : XeLaTeX
+% ============================================================
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[a4paper,top=9mm,bottom=8mm,left=11mm,right=11mm]{geometry}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{microtype}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage[most]{tcolorbox}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[normalem]{ulem}
+
+\setmainfont{Noto Sans}
+\setsansfont{Noto Sans}
+
+% ------------------------------------------------------------
+% PALETTE
+% ------------------------------------------------------------
+\definecolor{Green}{HTML}{D8842F}
+\definecolor{GreenDark}{HTML}{9A5716}
+\definecolor{GreenLight}{HTML}{FFF1DF}
+\definecolor{GreenLine}{HTML}{E7B77E}
+
+\definecolor{Blue}{HTML}{356FA8}
+\definecolor{BlueLight}{HTML}{EAF2F9}
+
+\definecolor{Red}{HTML}{D52F35}
+\definecolor{RedLight}{HTML}{FCEBED}
+
+\definecolor{Gold}{HTML}{B27A00}
+\definecolor{GoldLight}{HTML}{FFF3D7}
+
+\definecolor{Ink}{HTML}{172A32}
+\definecolor{Grey}{HTML}{64757D}
+\definecolor{Border}{HTML}{E7C7A6}
+\definecolor{White}{HTML}{FFFFFF}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{3pt}
+
+% ------------------------------------------------------------
+% OUTER FRAME
+% Left corners square, right corners rounded.
+% The green stripe is independent and perfectly vertical.
+% ------------------------------------------------------------
+\newcommand{\PageFrame}{%
+\begin{tikzpicture}[remember picture,overlay]
+  \coordinate (A) at ([xshift=8mm,yshift=-8mm]current page.north west);
+  \coordinate (B) at ([xshift=-8mm,yshift=-8mm]current page.north east);
+  \coordinate (C) at ([xshift=-8mm,yshift=8mm]current page.south east);
+  \coordinate (D) at ([xshift=8mm,yshift=8mm]current page.south west);
+  \def\r{2.5mm}
+
+  % Fine border with rounded right corners only
+  \draw[Border,line width=.65pt]
+    (A)
+    -- ([xshift=-\r]B)
+    arc[start angle=90,end angle=0,radius=\r]
+    -- ([yshift=\r]C)
+    arc[start angle=0,end angle=-90,radius=\r]
+    -- (D) -- cycle;
+
+  % Green vertical liseré
+  \draw[Green,line width=3.2mm] (A) -- (D);
+\end{tikzpicture}%
+}
+
+% ------------------------------------------------------------
+% BOX STYLES
+% ------------------------------------------------------------
+\tcbset{
+  enhanced,
+  boxrule=.6pt,
+  arc=2.8mm,
+  left=4mm,right=4mm,top=2mm,bottom=2mm,
+  coltext=Ink
+}
+
+\newtcolorbox{timelinebox}{
+  colback=White,colframe=GreenLine
+}
+
+\newtcolorbox{greenbox}{
+  colback=GreenLight,colframe=GreenLine
+}
+
+\newtcolorbox{bluebox}{
+  colback=BlueLight,colframe=Border
+}
+
+\newtcolorbox{redbox}{
+  colback=RedLight,colframe=Border
+}
+
+\newtcolorbox{whitebox}{
+  colback=White,colframe=Border
+}
+
+\newtcolorbox{goldbox}{
+  colback=GoldLight,colframe=GoldLight,
+  boxrule=0pt,arc=2.5mm,
+  left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm
+}
+
+% ------------------------------------------------------------
+% SMALL LABELS
+% ------------------------------------------------------------
+\newcommand{\pill}[2][GreenLight]{%
+  \tikz[baseline=(X.base)]{
+    \node[
+      fill=#1,
+      rounded corners=2pt,
+      inner xsep=4.2pt,
+      inner ysep=1.6pt,
+      font=\small\bfseries,
+      text=Ink
+    ] (X) {#2};
+  }%
+}
+
+\newcommand{\sectiontitle}[2]{%
+  {\large\bfseries\textcolor{#1}{#2}}%
+}
+
+\newcommand{\signalpill}[1]{%
+  \tikz[baseline=(X.base)]{
+    \node[
+      fill=GoldLight,
+      rounded corners=2pt,
+      inner xsep=3.7pt,
+      inner ysep=1.1pt,
+      font=\scriptsize\bfseries,
+      text=Ink
+    ] (X) {#1};
+  }%
+}
+
+% ------------------------------------------------------------
+% TIMELINE
+% ------------------------------------------------------------
+\newcommand{\Timeline}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+  % main line
+  \draw[-{Latex[length=3mm]},very thick,Ink] (0,0) -- (15.3,0);
+
+  % NOW arrow
+  \draw[-{Latex[length=3mm,width=2mm]},very thick,Green]
+    (9.3,1.10) -- (9.3,.10);
+  \node[font=\bfseries\small,text=Green] at (9.3,1.32) {NOW};
+
+  % present marker
+  \fill[Green] (9.3,0) circle (3.2pt);
+
+  % finished action in the past
+  \draw[Green,line width=4.5pt] (12,0) -- (14,0);
+  \fill[Green] (14.5,0) circle (2.2pt);
+
+  % labels
+  \node[font=\scriptsize\bfseries,text=Grey] at (2.2,-.48) {PAST};
+  \node[font=\scriptsize\bfseries,text=Green] at (9.3,-.48) {PRESENT};
+  \node[font=\scriptsize\bfseries,text=Grey] at (13.3,-.48) {FUTURE};
+
+  % action label
+  \node[
+    fill=GreenLight,rounded corners=2pt,
+    inner xsep=5pt,inner ysep=2pt,
+    font=\scriptsize\bfseries,text=GreenDark
+  ] at (13,.72) {action completed before a future moment};
+\end{tikzpicture}%
+}
+
+\begin{document}
+\PageFrame
+
+% ============================================================
+% HEADER
+% ============================================================
+\vspace*{1mm}
+
+\begin{center}
+  {\fontsize{25}{27}\selectfont\bfseries\textcolor{Ink}{FUTURE PERFECT}}
+
+  \vspace{0.75mm}
+  {\large\textcolor{Grey}{Le futur perfect anglais}}
+
+  \vspace{3mm}
+
+  \begin{tcolorbox}[
+    width=.88\textwidth,
+    colback=GreenLight,
+    colframe=GreenLight,
+    boxrule=0pt,
+    arc=3mm,
+    halign=center,
+    top=2.2mm,bottom=2.2mm
+  ]
+    {\large\bfseries\textcolor{GreenDark}{SUBJECT + WILL + HAVE + PAST PARTICIPLE}}
+    \quad
+    {\small(+ \textbf{-s / -es} à la 3\ieme{} personne du singulier)}
+  \end{tcolorbox}
+\end{center}
+
+\vspace{1mm}
+
+% ============================================================
+% TIMELINE
+% ============================================================
+\begin{timelinebox}
+  \sectiontitle{Green}{La ligne du temps}
+
+  \vspace{0.75mm}
+  \begin{center}
+    \Timeline
+  \end{center}
+
+  \vspace{-1mm}
+  \begin{center}
+    \small
+    Le \textbf{Future Perfect} décrit une action
+    \textbf{\textcolor{Green}{qui sera terminée avant un moment futur}}.
+  \end{center}
+\end{timelinebox}
+
+\vspace{1.35mm}
+
+% ============================================================
+% AFFIRMATIVE / NEGATIVE
+% ============================================================
+\begin{minipage}[t]{.485\textwidth}
+\begin{greenbox}
+  \sectiontitle{Green}{Affirmative}
+
+  \vspace{0.75mm}
+  \begin{tabular}{@{}>{\bfseries}l l@{}}
+    I / You / He / She / It / We / They & will have worked.\\
+    
+  \end{tabular}
+
+  \vspace{0.75mm}
+  \textit{I will have finished by 8 pm.}\\[-1mm]
+  \textit{She will be travelling by Friday.}
+\end{greenbox}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.485\textwidth}
+\begin{redbox}
+  \sectiontitle{Red}{Negative}
+
+  \vspace{0.75mm}
+  \begin{tabular}{@{}>{\bfseries}l l@{}}
+    I / You / He / She / It / We / They & \textcolor{Red}{\bfseries will not have} worked.\\
+    
+  \end{tabular}
+
+  \vspace{0.75mm}
+  \textit{I won't have finished by 8 pm.}\\[-1mm]
+  \textit{He won't have arrived yet.}
+\end{redbox}
+\end{minipage}
+
+\vspace{1.35mm}
+
+% ============================================================
+% QUESTION
+% ============================================================
+\begin{bluebox}
+  \sectiontitle{Blue}{Question}
+
+  \vspace{0.75mm}
+  \begin{tabularx}{\textwidth}{@{}>{\color{Blue}\bfseries}l X@{}}
+    Will & I / you / he / she / it / we / they have worked ?\\
+    
+  \end{tabularx}
+
+  \vspace{0.75mm}
+  \textit{Will you be working by 8 o'clock tomorrow evening? \qquad Will she be sleeping?}
+
+  \vspace{1mm}
+  \begin{tcolorbox}[
+    colback=RedLight,colframe=RedLight,boxrule=0pt,
+    arc=2mm,left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm
+  ]
+    \textcolor{Red}{\bfseries !\quad Attention :}
+    après \textbf{did}, le verbe revient à sa forme de base :
+    \textbf{Did he work?} \quad et non \quad
+    \textcolor{Grey}{\sout{Did he worked?}}
+  \end{tcolorbox}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ============================================================
+% USES
+% ============================================================
+\begin{greenbox}
+  \sectiontitle{Green}{When do we use the Simple Past?}
+
+  \vspace{0.75mm}
+
+  \begin{tabularx}{\textwidth}{@{}p{.31\textwidth} X@{}}
+    \pill{COMPLETED BEFORE A FUTURE MOMENT}
+      &
+      Actions terminées dans le passé.
+      \newline \textit{I will have finished by 8 pm.}\\[0.7mm]
+
+    \pill{DEADLINES}
+      &
+      Action située à un moment précis du passé.
+      \newline \textit{By Friday, she will have finished the work.}\\[0.7mm]
+
+    \pill{FUTURE SEQUENCE}
+      &
+      Actions qui se succèdent dans le passé.
+      \newline \textit{When you arrive, they will have already left.}\\[0.7mm]
+
+    \pill{RESULT BY A FUTURE TIME}
+      &
+      Habitudes répétées dans le passé.
+      \newline \textit{They will be travelling this time by 8 o'clock tomorrow.}
+  \end{tabularx}
+\end{greenbox}
+
+\vspace{1.35mm}
+
+% ============================================================
+% EXAMPLES
+% ============================================================
+\begin{bluebox}
+  \sectiontitle{Blue}{Examples}
+
+  \vspace{0.75mm}
+  \begin{tabularx}{\textwidth}{@{}X@{\hspace{7mm}}X@{}}
+    \textbf{I will have finished my work by dinner.}
+    &
+    \textbf{Paul will have gone home by then.}\\[-.5mm]
+    \textit{J'ai visité Londres l'été dernier.}
+    &
+    \textit{Paul a travaillé tard hier.}\\[0.7mm]
+    \textbf{She will have finished by 6 pm.}
+    &
+    \textbf{Will you have finished the film by then?}\\[-.5mm]
+    \textit{Elle a ouvert la porte et s'est assise.}
+    &
+    \textit{As-tu regardé le film ?}
+  \end{tabularx}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ============================================================
+% SIGNAL WORDS
+% ============================================================
+\begin{goldbox}
+  \begin{center}
+    {\normalsize\bfseries\textcolor{Gold}{SIGNAL WORDS}}
+    \hspace{3mm}
+    \signalpill{by 8 o'clock tomorrow}\hspace{1mm}
+    \signalpill{by Friday}\hspace{1mm}
+    \signalpill{by then}\hspace{1mm}
+    \signalpill{before}\hspace{1mm}
+    \signalpill{by the end of the week}\hspace{1mm}
+    \signalpill{by next year}
+
+    \vspace{0.75mm}
+
+    \signalpill{already}\hspace{1mm}
+    \signalpill{yet}
+  \end{center}
+\end{goldbox}
+
+\end{document}

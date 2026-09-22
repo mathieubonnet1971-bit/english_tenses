@@ -1,0 +1,385 @@
+% ============================================================
+% ENGLISH TENSES — SIMPLE PRESENT
+% Version graphique LaTeX/TikZ
+% Compilation : XeLaTeX
+% ============================================================
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[a4paper,top=9mm,bottom=8mm,left=11mm,right=11mm]{geometry}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{microtype}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage[most]{tcolorbox}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[normalem]{ulem}
+
+\setmainfont{Noto Sans}
+\setsansfont{Noto Sans}
+
+% ------------------------------------------------------------
+% PALETTE
+% ------------------------------------------------------------
+\definecolor{Green}{HTML}{319B58}
+\definecolor{GreenDark}{HTML}{17613A}
+\definecolor{GreenLight}{HTML}{EAF6EC}
+\definecolor{GreenLine}{HTML}{8FC9A3}
+
+\definecolor{Blue}{HTML}{17458F}
+\definecolor{BlueLight}{HTML}{E9F3FA}
+
+\definecolor{Red}{HTML}{D52F35}
+\definecolor{RedLight}{HTML}{FCEBED}
+
+\definecolor{Gold}{HTML}{B27A00}
+\definecolor{GoldLight}{HTML}{FFF3D7}
+
+\definecolor{Ink}{HTML}{172A32}
+\definecolor{Grey}{HTML}{64757D}
+\definecolor{Border}{HTML}{B9D3C3}
+\definecolor{White}{HTML}{FFFFFF}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{3pt}
+
+% ------------------------------------------------------------
+% OUTER FRAME
+% Left corners square, right corners rounded.
+% The green stripe is independent and perfectly vertical.
+% ------------------------------------------------------------
+\newcommand{\PageFrame}{%
+\begin{tikzpicture}[remember picture,overlay]
+  \coordinate (A) at ([xshift=8mm,yshift=-8mm]current page.north west);
+  \coordinate (B) at ([xshift=-8mm,yshift=-8mm]current page.north east);
+  \coordinate (C) at ([xshift=-8mm,yshift=8mm]current page.south east);
+  \coordinate (D) at ([xshift=8mm,yshift=8mm]current page.south west);
+  \def\r{2.5mm}
+
+  % Fine border with rounded right corners only
+  \draw[Border,line width=.65pt]
+    (A)
+    -- ([xshift=-\r]B)
+    arc[start angle=90,end angle=0,radius=\r]
+    -- ([yshift=\r]C)
+    arc[start angle=0,end angle=-90,radius=\r]
+    -- (D) -- cycle;
+
+  % Green vertical liseré
+  \draw[Green,line width=3.2mm] (A) -- (D);
+\end{tikzpicture}%
+}
+
+% ------------------------------------------------------------
+% BOX STYLES
+% ------------------------------------------------------------
+\tcbset{
+  enhanced,
+  boxrule=.6pt,
+  arc=2.8mm,
+  left=4mm,right=4mm,top=2mm,bottom=2mm,
+  coltext=Ink
+}
+
+\newtcolorbox{timelinebox}{
+  colback=White,colframe=GreenLine
+}
+
+\newtcolorbox{greenbox}{
+  colback=GreenLight,colframe=GreenLine
+}
+
+\newtcolorbox{bluebox}{
+  colback=BlueLight,colframe=Border
+}
+
+\newtcolorbox{redbox}{
+  colback=RedLight,colframe=Border
+}
+
+\newtcolorbox{whitebox}{
+  colback=White,colframe=Border
+}
+
+\newtcolorbox{goldbox}{
+  colback=GoldLight,colframe=GoldLight,
+  boxrule=0pt,arc=2.5mm,
+  left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm
+}
+
+% ------------------------------------------------------------
+% SMALL LABELS
+% ------------------------------------------------------------
+\newcommand{\pill}[2][GreenLight]{%
+  \tikz[baseline=(X.base)]{
+    \node[
+      fill=#1,
+      rounded corners=2pt,
+      inner xsep=4.2pt,
+      inner ysep=1.6pt,
+      font=\small\bfseries,
+      text=Ink
+    ] (X) {#2};
+  }%
+}
+
+\newcommand{\sectiontitle}[2]{%
+  {\large\bfseries\textcolor{#1}{#2}}%
+}
+
+\newcommand{\signalpill}[1]{%
+  \tikz[baseline=(X.base)]{
+    \node[
+      fill=GoldLight,
+      rounded corners=2pt,
+      inner xsep=3.7pt,
+      inner ysep=1.1pt,
+      font=\scriptsize\bfseries,
+      text=Ink
+    ] (X) {#1};
+  }%
+}
+
+% ------------------------------------------------------------
+% TIMELINE
+% ------------------------------------------------------------
+\newcommand{\Timeline}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+  % main line
+  \draw[-{Latex[length=3mm]},very thick,Ink] (0,0) -- (15.3,0);
+
+  % NOW arrow
+  \draw[-{Latex[length=3mm,width=2mm]},very thick,Green]
+    (9.3,1.10) -- (9.3,.10);
+  \node[font=\bfseries\small,text=Green] at (9.3,1.32) {NOW};
+
+  % present marker
+  \fill[Green] (9.3,0) circle (3.2pt);
+
+  % repeated action dots
+  \foreach \x in {1,2,3,4,5,6,7,8}
+    \fill[Green] (\x,0) circle (1.7pt);
+
+  % subtle repeated line
+  \draw[Green!55,line width=.7pt,dashed] (1,0) -- (8.2,0);
+
+  % labels
+  \node[font=\scriptsize\bfseries,text=Grey] at (2.2,-.48) {PAST};
+  \node[font=\scriptsize\bfseries,text=Green] at (9.3,-.48) {PRESENT};
+  \node[font=\scriptsize\bfseries,text=Grey] at (13.3,-.48) {FUTURE};
+
+  % action label
+  \node[
+    fill=GreenLight,rounded corners=2pt,
+    inner xsep=5pt,inner ysep=2pt,
+    font=\scriptsize\bfseries,text=GreenDark
+  ] at (4.2,.72) {repeated / habitual action};
+\end{tikzpicture}%
+}
+
+\begin{document}
+\PageFrame
+
+% ============================================================
+% HEADER
+% ============================================================
+\vspace*{1mm}
+
+\begin{center}
+  {\fontsize{25}{27}\selectfont\bfseries\textcolor{Ink}{SIMPLE PRESENT}}
+
+  \vspace{0.75mm}
+  {\large\textcolor{Grey}{Le présent simple anglais}}
+
+  \vspace{3mm}
+
+  \begin{tcolorbox}[
+    width=.88\textwidth,
+    colback=GreenLight,
+    colframe=GreenLight,
+    boxrule=0pt,
+    arc=3mm,
+    halign=center,
+    top=2.2mm,bottom=2.2mm
+  ]
+    {\large\bfseries\textcolor{GreenDark}{SUBJECT + BASE VERB}}
+    \quad
+    {\small(+ \textbf{-s / -es} à la 3\ieme{} personne du singulier)}
+  \end{tcolorbox}
+\end{center}
+
+\vspace{1mm}
+
+% ============================================================
+% TIMELINE
+% ============================================================
+\begin{timelinebox}
+  \sectiontitle{Green}{La ligne du temps}
+
+  \vspace{0.75mm}
+  \begin{center}
+    \Timeline
+  \end{center}
+
+  \vspace{-1mm}
+  \begin{center}
+    \small
+    Le \textbf{Simple Present} décrit surtout des situations
+    \textbf{\textcolor{Green}{habituelles, répétées ou générales}}.
+  \end{center}
+\end{timelinebox}
+
+\vspace{1.35mm}
+
+% ============================================================
+% AFFIRMATIVE / NEGATIVE
+% ============================================================
+\begin{minipage}[t]{.485\textwidth}
+\begin{greenbox}
+  \sectiontitle{Green}{Affirmative}
+
+  \vspace{0.75mm}
+  \begin{tabular}{@{}>{\bfseries}l l@{}}
+    I / You / We / They & work.\\
+    He / She / It & \textcolor{Green}{\bfseries works}.
+  \end{tabular}
+
+  \vspace{0.75mm}
+  \textit{I work in France.}\\[-1mm]
+  \textit{She works in London.}
+\end{greenbox}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.485\textwidth}
+\begin{redbox}
+  \sectiontitle{Red}{Negative}
+
+  \vspace{0.75mm}
+  \begin{tabular}{@{}>{\bfseries}l l@{}}
+    I / You / We / They & \textcolor{Red}{\bfseries do not} work.\\
+    He / She / It & \textcolor{Red}{\bfseries does not} work.
+  \end{tabular}
+
+  \vspace{0.75mm}
+  \textit{I don't work on Sundays.}\\[-1mm]
+  \textit{He doesn't work here.}
+\end{redbox}
+\end{minipage}
+
+\vspace{1.35mm}
+
+% ============================================================
+% QUESTION
+% ============================================================
+\begin{bluebox}
+  \sectiontitle{Blue}{Question}
+
+  \vspace{0.75mm}
+  \begin{tabularx}{\textwidth}{@{}>{\color{Blue}\bfseries}l X@{}}
+    Do & I / you / we / they work ?\\
+    Does & he / she / it work ?
+  \end{tabularx}
+
+  \vspace{0.75mm}
+  \textit{Do you work here? \qquad Does she speak English?}
+
+  \vspace{1mm}
+  \begin{tcolorbox}[
+    colback=RedLight,colframe=RedLight,boxrule=0pt,
+    arc=2mm,left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm
+  ]
+    \textcolor{Red}{\bfseries !\quad Attention :}
+    après \textbf{does}, le verbe revient à sa forme de base :
+    \textbf{Does he work?} \quad et non \quad
+    \textcolor{Grey}{\sout{Does he works?}}
+  \end{tcolorbox}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ============================================================
+% USES
+% ============================================================
+\begin{greenbox}
+  \sectiontitle{Green}{When do we use the Simple Present?}
+
+  \vspace{0.75mm}
+
+  \begin{tabularx}{\textwidth}{@{}p{.31\textwidth} X@{}}
+    \pill{HABITS / ROUTINES}
+      &
+      Actions répétées ou habitudes.
+      \newline \textit{I get up at 7 every day.}\\[0.7mm]
+
+    \pill{GENERAL TRUTHS}
+      &
+      Faits généralement vrais, lois ou vérités générales.
+      \newline \textit{Water boils at 100°C.}\\[0.7mm]
+
+    \pill{PERMANENT SITUATIONS}
+      &
+      Situations considérées comme stables ou durables.
+      \newline \textit{She lives in Paris.}\\[0.7mm]
+
+    \pill{TIMETABLES / SCHEDULES}
+      &
+      Horaires officiels et programmes.
+      \newline \textit{The train leaves at 8:15.}
+  \end{tabularx}
+\end{greenbox}
+
+\vspace{1.35mm}
+
+% ============================================================
+% EXAMPLES
+% ============================================================
+\begin{bluebox}
+  \sectiontitle{Blue}{Examples}
+
+  \vspace{0.75mm}
+  \begin{tabularx}{\textwidth}{@{}X@{\hspace{7mm}}X@{}}
+    \textbf{I usually drink coffee in the morning.}
+    &
+    \textbf{Paul works from home on Fridays.}\\[-.5mm]
+    \textit{Je bois habituellement du café le matin.}
+    &
+    \textit{Paul travaille chez lui le vendredi.}\\[0.7mm]
+    \textbf{The Earth goes around the Sun.}
+    &
+    \textbf{We don't watch television every evening.}\\[-.5mm]
+    \textit{La Terre tourne autour du Soleil.}
+    &
+    \textit{Nous ne regardons pas la télévision tous les soirs.}
+  \end{tabularx}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ============================================================
+% SIGNAL WORDS
+% ============================================================
+\begin{goldbox}
+  \begin{center}
+    {\normalsize\bfseries\textcolor{Gold}{SIGNAL WORDS}}
+    \hspace{3mm}
+    \signalpill{always}\hspace{1mm}
+    \signalpill{usually}\hspace{1mm}
+    \signalpill{often}\hspace{1mm}
+    \signalpill{sometimes}\hspace{1mm}
+    \signalpill{rarely}\hspace{1mm}
+    \signalpill{never}
+
+    \vspace{0.75mm}
+
+    \signalpill{every day}\hspace{1mm}
+    \signalpill{every week}\hspace{1mm}
+    \signalpill{on Mondays}\hspace{1mm}
+    \signalpill{normally}
+  \end{center}
+\end{goldbox}
+
+\end{document}

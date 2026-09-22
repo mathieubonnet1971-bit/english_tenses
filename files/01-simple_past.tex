@@ -1,0 +1,380 @@
+% ============================================================
+% ENGLISH TENSES — SIMPLE PAST
+% Version graphique LaTeX/TikZ
+% Compilation : XeLaTeX
+% ============================================================
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[a4paper,top=9mm,bottom=8mm,left=11mm,right=11mm]{geometry}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{microtype}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage[most]{tcolorbox}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[normalem]{ulem}
+
+\setmainfont{Noto Sans}
+\setsansfont{Noto Sans}
+
+% ------------------------------------------------------------
+% PALETTE
+% ------------------------------------------------------------
+\definecolor{Green}{HTML}{356FA8}
+\definecolor{GreenDark}{HTML}{244D78}
+\definecolor{GreenLight}{HTML}{EAF2F9}
+\definecolor{GreenLine}{HTML}{9BBBD7}
+
+\definecolor{Blue}{HTML}{356FA8}
+\definecolor{BlueLight}{HTML}{EAF2F9}
+
+\definecolor{Red}{HTML}{D52F35}
+\definecolor{RedLight}{HTML}{FCEBED}
+
+\definecolor{Gold}{HTML}{B27A00}
+\definecolor{GoldLight}{HTML}{FFF3D7}
+
+\definecolor{Ink}{HTML}{172A32}
+\definecolor{Grey}{HTML}{64757D}
+\definecolor{Border}{HTML}{B9D3E3}
+\definecolor{White}{HTML}{FFFFFF}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{3pt}
+
+% ------------------------------------------------------------
+% OUTER FRAME
+% Left corners square, right corners rounded.
+% The green stripe is independent and perfectly vertical.
+% ------------------------------------------------------------
+\newcommand{\PageFrame}{%
+\begin{tikzpicture}[remember picture,overlay]
+  \coordinate (A) at ([xshift=8mm,yshift=-8mm]current page.north west);
+  \coordinate (B) at ([xshift=-8mm,yshift=-8mm]current page.north east);
+  \coordinate (C) at ([xshift=-8mm,yshift=8mm]current page.south east);
+  \coordinate (D) at ([xshift=8mm,yshift=8mm]current page.south west);
+  \def\r{2.5mm}
+
+  % Fine border with rounded right corners only
+  \draw[Border,line width=.65pt]
+    (A)
+    -- ([xshift=-\r]B)
+    arc[start angle=90,end angle=0,radius=\r]
+    -- ([yshift=\r]C)
+    arc[start angle=0,end angle=-90,radius=\r]
+    -- (D) -- cycle;
+
+  % Green vertical liseré
+  \draw[Green,line width=3.2mm] (A) -- (D);
+\end{tikzpicture}%
+}
+
+% ------------------------------------------------------------
+% BOX STYLES
+% ------------------------------------------------------------
+\tcbset{
+  enhanced,
+  boxrule=.6pt,
+  arc=2.8mm,
+  left=4mm,right=4mm,top=2mm,bottom=2mm,
+  coltext=Ink
+}
+
+\newtcolorbox{timelinebox}{
+  colback=White,colframe=GreenLine
+}
+
+\newtcolorbox{greenbox}{
+  colback=GreenLight,colframe=GreenLine
+}
+
+\newtcolorbox{bluebox}{
+  colback=BlueLight,colframe=Border
+}
+
+\newtcolorbox{redbox}{
+  colback=RedLight,colframe=Border
+}
+
+\newtcolorbox{whitebox}{
+  colback=White,colframe=Border
+}
+
+\newtcolorbox{goldbox}{
+  colback=GoldLight,colframe=GoldLight,
+  boxrule=0pt,arc=2.5mm,
+  left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm
+}
+
+% ------------------------------------------------------------
+% SMALL LABELS
+% ------------------------------------------------------------
+\newcommand{\pill}[2][GreenLight]{%
+  \tikz[baseline=(X.base)]{
+    \node[
+      fill=#1,
+      rounded corners=2pt,
+      inner xsep=4.2pt,
+      inner ysep=1.6pt,
+      font=\small\bfseries,
+      text=Ink
+    ] (X) {#2};
+  }%
+}
+
+\newcommand{\sectiontitle}[2]{%
+  {\large\bfseries\textcolor{#1}{#2}}%
+}
+
+\newcommand{\signalpill}[1]{%
+  \tikz[baseline=(X.base)]{
+    \node[
+      fill=GoldLight,
+      rounded corners=2pt,
+      inner xsep=3.7pt,
+      inner ysep=1.1pt,
+      font=\scriptsize\bfseries,
+      text=Ink
+    ] (X) {#1};
+  }%
+}
+
+% ------------------------------------------------------------
+% TIMELINE
+% ------------------------------------------------------------
+\newcommand{\Timeline}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+  % main line
+  \draw[-{Latex[length=3mm]},very thick,Ink] (0,0) -- (15.3,0);
+
+  % NOW arrow
+  \draw[-{Latex[length=3mm,width=2mm]},very thick,Green]
+    (9.3,1.10) -- (9.3,.10);
+  \node[font=\bfseries\small,text=Green] at (9.3,1.32) {NOW};
+
+  % present marker
+  \fill[Green] (9.3,0) circle (3.2pt);
+
+  % finished action in the past
+  \draw[Green,line width=4.5pt] (3.5,0) -- (5.4,0);
+  \fill[Green] (5.4,0) circle (2.2pt);
+
+  % labels
+  \node[font=\scriptsize\bfseries,text=Grey] at (2.2,-.48) {PAST};
+  \node[font=\scriptsize\bfseries,text=Green] at (9.3,-.48) {PRESENT};
+  \node[font=\scriptsize\bfseries,text=Grey] at (13.3,-.48) {FUTURE};
+
+  % action label
+  \node[
+    fill=GreenLight,rounded corners=2pt,
+    inner xsep=5pt,inner ysep=2pt,
+    font=\scriptsize\bfseries,text=GreenDark
+  ] at (4.2,.72) {finished past action};
+\end{tikzpicture}%
+}
+
+\begin{document}
+\PageFrame
+
+% ============================================================
+% HEADER
+% ============================================================
+\vspace*{1mm}
+
+\begin{center}
+  {\fontsize{25}{27}\selectfont\bfseries\textcolor{Ink}{SIMPLE PAST}}
+
+  \vspace{0.75mm}
+  {\large\textcolor{Grey}{Le prétérit anglais}}
+
+  \vspace{3mm}
+
+  \begin{tcolorbox}[
+    width=.88\textwidth,
+    colback=GreenLight,
+    colframe=GreenLight,
+    boxrule=0pt,
+    arc=3mm,
+    halign=center,
+    top=2.2mm,bottom=2.2mm
+  ]
+    {\large\bfseries\textcolor{GreenDark}{SUBJECT + PAST TENSE}}
+    \quad
+    {\small(+ \textbf{-s / -es} à la 3\ieme{} personne du singulier)}
+  \end{tcolorbox}
+\end{center}
+
+\vspace{1mm}
+
+% ============================================================
+% TIMELINE
+% ============================================================
+\begin{timelinebox}
+  \sectiontitle{Green}{La ligne du temps}
+
+  \vspace{0.75mm}
+  \begin{center}
+    \Timeline
+  \end{center}
+
+  \vspace{-1mm}
+  \begin{center}
+    \small
+    Le \textbf{Simple Past} décrit une action
+    \textbf{\textcolor{Green}{terminée dans le passé}}.
+  \end{center}
+\end{timelinebox}
+
+\vspace{1.35mm}
+
+% ============================================================
+% AFFIRMATIVE / NEGATIVE
+% ============================================================
+\begin{minipage}[t]{.485\textwidth}
+\begin{greenbox}
+  \sectiontitle{Green}{Affirmative}
+
+  \vspace{0.75mm}
+  \begin{tabular}{@{}>{\bfseries}l l@{}}
+    I / You / We / They & worked.\\
+    He / She / It & worked.
+  \end{tabular}
+
+  \vspace{0.75mm}
+  \textit{I worked here last year.}\\[-1mm]
+  \textit{She visited London yesterday.}
+\end{greenbox}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.485\textwidth}
+\begin{redbox}
+  \sectiontitle{Red}{Negative}
+
+  \vspace{0.75mm}
+  \begin{tabular}{@{}>{\bfseries}l l@{}}
+    I / You / We / They & \textcolor{Red}{\bfseries did not} work.\\
+    He / She / It & \textcolor{Red}{\bfseries did not} work.
+  \end{tabular}
+
+  \vspace{0.75mm}
+  \textit{I didn't work yesterday.}\\[-1mm]
+  \textit{He didn't see the film.}
+\end{redbox}
+\end{minipage}
+
+\vspace{1.35mm}
+
+% ============================================================
+% QUESTION
+% ============================================================
+\begin{bluebox}
+  \sectiontitle{Blue}{Question}
+
+  \vspace{0.75mm}
+  \begin{tabularx}{\textwidth}{@{}>{\color{Blue}\bfseries}l X@{}}
+    Did & I / you / we / they work ?\\
+    Did & he / she / it work ?
+  \end{tabularx}
+
+  \vspace{0.75mm}
+  \textit{Did you work yesterday? \qquad Did she see him?}
+
+  \vspace{1mm}
+  \begin{tcolorbox}[
+    colback=RedLight,colframe=RedLight,boxrule=0pt,
+    arc=2mm,left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm
+  ]
+    \textcolor{Red}{\bfseries !\quad Attention :}
+    après \textbf{did}, le verbe revient à sa forme de base :
+    \textbf{Did he work?} \quad et non \quad
+    \textcolor{Grey}{\sout{Did he worked?}}
+  \end{tcolorbox}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ============================================================
+% USES
+% ============================================================
+\begin{greenbox}
+  \sectiontitle{Green}{When do we use the Simple Past?}
+
+  \vspace{0.75mm}
+
+  \begin{tabularx}{\textwidth}{@{}p{.31\textwidth} X@{}}
+    \pill{FINISHED PAST ACTIONS}
+      &
+      Actions terminées dans le passé.
+      \newline \textit{I watched a film yesterday.}\\[0.7mm]
+
+    \pill{SPECIFIC PAST TIME}
+      &
+      Action située à un moment précis du passé.
+      \newline \textit{She arrived at 8 o'clock.}\\[0.7mm]
+
+    \pill{PAST SEQUENCE}
+      &
+      Actions qui se succèdent dans le passé.
+      \newline \textit{He opened the door and walked in.}\\[0.7mm]
+
+    \pill{PAST HABITS}
+      &
+      Habitudes répétées dans le passé.
+      \newline \textit{We played outside every day.}
+  \end{tabularx}
+\end{greenbox}
+
+\vspace{1.35mm}
+
+% ============================================================
+% EXAMPLES
+% ============================================================
+\begin{bluebox}
+  \sectiontitle{Blue}{Examples}
+
+  \vspace{0.75mm}
+  \begin{tabularx}{\textwidth}{@{}X@{\hspace{7mm}}X@{}}
+    \textbf{I visited London last summer.}
+    &
+    \textbf{Paul worked late yesterday.}\\[-.5mm]
+    \textit{J'ai visité Londres l'été dernier.}
+    &
+    \textit{Paul a travaillé tard hier.}\\[0.7mm]
+    \textbf{She opened the door and sat down.}
+    &
+    \textbf{Did you watch the film?}\\[-.5mm]
+    \textit{Elle a ouvert la porte et s'est assise.}
+    &
+    \textit{As-tu regardé le film ?}
+  \end{tabularx}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ============================================================
+% SIGNAL WORDS
+% ============================================================
+\begin{goldbox}
+  \begin{center}
+    {\normalsize\bfseries\textcolor{Gold}{SIGNAL WORDS}}
+    \hspace{3mm}
+    \signalpill{yesterday}\hspace{1mm}
+    \signalpill{last week}\hspace{1mm}
+    \signalpill{last year}\hspace{1mm}
+    \signalpill{ago}\hspace{1mm}
+    \signalpill{in 2020}\hspace{1mm}
+    \signalpill{then}
+
+    \vspace{0.75mm}
+
+    \signalpill{when}\hspace{1mm}
+    \signalpill{on Monday}
+  \end{center}
+\end{goldbox}
+
+\end{document}
