@@ -1,0 +1,129 @@
+
+\documentclass[a4paper,11pt]{article}
+\usepackage{fontspec}
+\setmainfont{Noto Sans}
+\usepackage[french]{babel}
+\usepackage{microtype}
+\usepackage[top=9mm,bottom=8mm,left=11mm,right=11mm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage[most]{tcolorbox}
+\pagestyle{empty}
+
+\definecolor{Blue}{HTML}{356FA8}
+\definecolor{BlueDark}{HTML}{244D78}
+\definecolor{BlueLight}{HTML}{EAF2F9}
+\definecolor{Border}{HTML}{B9D3E3}
+\definecolor{Ink}{HTML}{172A32}
+\definecolor{Grey}{HTML}{64757D}
+\definecolor{Red}{HTML}{D52F35}
+\definecolor{RedLight}{HTML}{FCEBED}
+
+\tcbset{
+ enhanced,boxrule=.6pt,arc=2.8mm,
+ left=3.7mm,right=3.7mm,top=1.75mm,bottom=1.75mm,
+ boxsep=1mm,coltext=Ink
+}
+\newtcolorbox{bluebox}[1][]{colback=BlueLight,colframe=Border,#1}
+\newtcolorbox{warnbox}[1][]{colback=RedLight,colframe=Red,
+ left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm,#1}
+
+\begin{document}
+\begin{tikzpicture}[remember picture,overlay]
+\draw[draw=Border,line width=.9pt,rounded corners=1.7mm]
+ ([xshift=1mm,yshift=-1mm]current page.north west)
+ -- ([xshift=-1mm,yshift=-1mm]current page.north east)
+ -- ([xshift=-1mm,yshift=1mm]current page.south east)
+ -- ([xshift=1mm,yshift=1mm]current page.south west)--cycle;
+\fill[Blue] ([xshift=1mm,yshift=-1mm]current page.north west)
+ rectangle ([xshift=5.2mm,yshift=1mm]current page.south west);
+\end{tikzpicture}
+
+\vspace*{1mm}\hspace*{6mm}
+{\color{BlueDark}\fontsize{25}{27}\selectfont\bfseries PRETERIT DE L'INDICATIU}
+
+\vspace{0.5mm}\hspace*{6mm}
+{\color{Grey}\large Le prétérit de l'indicatif}
+
+\vspace{2.5mm}\hspace*{6mm}
+\begin{minipage}{0.91\textwidth}
+
+\begin{bluebox}
+\textbf{\color{BlueDark}CONSTRUCCION}\\[1mm]
+\centering
+{\Large \textbf{RADICAL + TERMINASONS DEL PRETERIT}}\\[1mm]
+\small
+Exemple : \textbf{CANTAR}\\[1mm]
+\textbf{cantèri}\quad \textbf{cantères}\quad \textbf{cantèt}\quad
+\textbf{cantèrem}\quad \textbf{cantèretz}\quad \textbf{cantèron}
+\end{bluebox}
+
+\vspace{2.5mm}
+\begin{center}
+\begin{tikzpicture}[>=Latex]
+\draw[Ink!65,line width=.8pt] (0,0)--(15.1,0);
+\node[below=2mm] at (2.0,0) {\small PASSAT};
+\node[below=2mm] at (7.5,0) {\small ARA};
+\node[below=2mm] at (13.5,0) {\small FUTUR};
+\draw[Blue,line width=2.5pt,->] (3.0,0)--(5.1,0);
+\draw[BlueDark,line width=1.1pt,->] (7.5,1.0)--(7.5,.18);
+\node[above=3.8mm] at (7.5,1.0) {\bfseries\color{BlueDark}ARA};
+\node[above=3mm,align=center,text width=6.2cm] at (4.1,0)
+{\small\bfseries eveniment acabat, dins la seguida del raconte};
+\end{tikzpicture}
+\end{center}
+
+\vspace{1.5mm}
+\begin{bluebox}
+\textbf{\color{BlueDark}A QUÉ SERVÍS ?}\\[1mm]
+\begin{itemize}\setlength{\itemsep}{0.4mm}
+\item contar un \textbf{eveniment acabat} dins lo passat ;
+\item far avançar la \textbf{seguida dels eveniments} d'un raconte ;
+\item presentar d'accions ponctualas e successivas ;
+\item s'utiliza principalament dins lo \textbf{raconte escrit e literari}.
+\end{itemize}
+\end{bluebox}
+
+\vspace{2mm}
+\begin{bluebox}
+\textbf{\color{BlueDark}EXEMPLES}\\[1mm]
+\textbf{Intrèt dins l'ostal e barrèt la pòrta.}\\
+\textbf{Prenguèt lo libre, lo legiguèt puèi lo tornèt pausar.}\\
+\textbf{Soudain, la pòrta se dobriguèt.}\\
+\textbf{Lo rei arribèt, parlèt al pòble e partiguèt.}
+\end{bluebox}
+
+\vspace{2mm}
+\begin{minipage}{0.485\textwidth}
+\begin{bluebox}[height=3.25cm]
+\textbf{\color{BlueDark}PRETERIT / IMPERFÈIT}\\[1mm]
+Lo \textbf{preterit} presenta l'eveniment que fa avançar lo raconte.\\[1mm]
+\textit{Intrèt dins la sala.}\\[1mm]
+L'\textbf{imperfèit} descriu puslèu lo fons, la durada o l'abituda.
+\end{bluebox}
+\end{minipage}\hfill
+\begin{minipage}{0.485\textwidth}
+\begin{warnbox}[height=3.25cm]
+\textbf{\color{Red}ATENCION}\\[1mm]
+Las formas del preterit pòdon èsser \textbf{irregularas}.\\[1mm]
+Cal doncas aprene las formas dels vèrbs frequents :\\
+\textbf{foguèt, aguèt, faguèt, venguèt, prenguèt...}
+\end{warnbox}
+\end{minipage}
+
+\vspace{2mm}
+\begin{bluebox}
+\textbf{\color{BlueDark}A RETÉNER}\\[1mm]
+Lo preterit es lo temps del \textbf{primièr plan del raconte}: presenta d'eveniments acabats
+e successius. Dins l'usatge corrent, d'autras formas del passat pòdon èsser preferidas segon lo contèxt.
+\end{bluebox}
+
+\vspace{1.5mm}\centering
+{\small\color{Grey}\textbf{Repèras frequents dins los racontes :} puèi, alara, soudain, tot d'un còp, enfin, aquel jorn, quand...}
+
+\vspace{1mm}
+{\scriptsize\color{Grey}Referéncia : occitan languedocian, graphia classica, vèrb'Òc / Lo Congrès permanent de la lenga occitana.}
+
+\end{minipage}
+\end{document}

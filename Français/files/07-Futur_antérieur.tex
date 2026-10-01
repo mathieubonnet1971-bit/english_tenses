@@ -1,0 +1,316 @@
+
+% ============================================================
+% FRENCH TENSES — FUTUR ANTÉRIEUR
+% Version graphique LaTeX/TikZ
+% Compilation : XeLaTeX
+% ============================================================
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[a4paper,top=9mm,bottom=8mm,left=11mm,right=11mm]{geometry}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{microtype}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage[most]{tcolorbox}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[normalem]{ulem}
+
+\setmainfont{Noto Sans}
+\setsansfont{Noto Sans}
+
+% ------------------------------------------------------------
+% PALETTE — FUTUR = ORANGE
+% ------------------------------------------------------------
+\definecolor{Orange}{HTML}{D8842F}
+\definecolor{OrangeDark}{HTML}{9A5716}
+\definecolor{OrangeLight}{HTML}{FFF1DF}
+\definecolor{OrangeLine}{HTML}{E7B77E}
+\definecolor{Border}{HTML}{E7C7A6}
+
+\definecolor{Red}{HTML}{D52F35}
+\definecolor{RedLight}{HTML}{FCEBED}
+\definecolor{Gold}{HTML}{B27A00}
+\definecolor{GoldLight}{HTML}{FFF3D7}
+\definecolor{Ink}{HTML}{172A32}
+\definecolor{Grey}{HTML}{64757D}
+\definecolor{White}{HTML}{FFFFFF}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{3pt}
+
+% ------------------------------------------------------------
+% CADRE
+% ------------------------------------------------------------
+\newcommand{\PageFrame}{%
+\begin{tikzpicture}[remember picture,overlay]
+  \coordinate (A) at ([xshift=8mm,yshift=-8mm]current page.north west);
+  \coordinate (B) at ([xshift=-8mm,yshift=-8mm]current page.north east);
+  \coordinate (C) at ([xshift=-8mm,yshift=8mm]current page.south east);
+  \coordinate (D) at ([xshift=8mm,yshift=8mm]current page.south west);
+  \def\r{1.7mm}
+
+  \draw[Border,line width=.65pt]
+    (A)
+    -- ([xshift=-\r]B)
+    arc[start angle=90,end angle=0,radius=\r]
+    -- ([yshift=\r]C)
+    arc[start angle=0,end angle=-90,radius=\r]
+    -- (D) -- cycle;
+
+  \draw[Orange,line width=3.2mm] (A) -- (D);
+\end{tikzpicture}%
+}
+
+% ------------------------------------------------------------
+% BOÎTES
+% ------------------------------------------------------------
+\tcbset{
+  enhanced,
+  boxrule=.6pt,
+  arc=2.8mm,
+  left=3.7mm,right=3.7mm,top=1.75mm,bottom=1.75mm,
+  boxsep=1mm,
+  coltext=Ink
+}
+
+\newtcolorbox{bluebox}{colback=OrangeLight,colframe=OrangeLine}
+\newtcolorbox{redbox}{colback=RedLight,colframe=Border}
+\newtcolorbox{whitebox}{colback=White,colframe=Border}
+\newtcolorbox{goldbox}{
+  colback=GoldLight,colframe=GoldLight,
+  boxrule=0pt,arc=2.5mm,
+  left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm
+}
+
+\newcommand{\sectiontitle}[2]{%
+  {\large\bfseries\textcolor{#1}{#2}}%
+}
+
+\newcommand{\pill}[2][OrangeLight]{%
+  \tikz[baseline=(X.base)]{
+    \node[
+      fill=#1,rounded corners=2pt,
+      inner xsep=4.2pt,inner ysep=1.6pt,
+      font=\small\bfseries,text=Ink
+    ] (X) {#2};
+  }%
+}
+
+\newcommand{\signalpill}[1]{%
+  \tikz[baseline=(X.base)]{
+    \node[
+      fill=GoldLight,rounded corners=2pt,
+      inner xsep=3.7pt,inner ysep=1.1pt,
+      font=\scriptsize\bfseries,text=Ink
+    ] (X) {#1};
+  }%
+}
+
+% ------------------------------------------------------------
+% TIMELINE
+% ------------------------------------------------------------
+\newcommand{\Timeline}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \draw[-{Latex[length=3mm]},very thick,Ink] (0,0) -- (15.3,0);
+
+  \draw[-{Latex[length=3mm,width=2mm]},very thick,Orange]
+    (8.2,1.10) -- (8.2,.10);
+  \node[font=\bfseries\small,text=Orange] at (8.2,1.32) {MAINTENANT};
+
+  \draw[Orange,line width=2.2pt] (9.3,0) -- (11.8,0);
+  \fill[Orange] (9.3,0) circle (3.2pt);
+  \fill[Orange] (11.8,0) circle (3.2pt);
+
+  \node[
+    fill=OrangeLight,rounded corners=2pt,
+    inner xsep=5pt,inner ysep=2pt,
+    font=\scriptsize\bfseries,text=OrangeDark
+  ] at (10.55,.72) {action terminée};
+
+  \node[font=\scriptsize\bfseries,text=Grey] at (10.55,-.55)
+    {avant un moment futur};
+
+  \node[font=\scriptsize\bfseries,text=Ink] at (11.8,.34) {repère futur};
+
+  \node[font=\scriptsize\bfseries,text=Grey] at (3.0,-.48) {PASSÉ};
+  \node[font=\scriptsize\bfseries,text=Orange] at (8.2,-.48) {PRÉSENT};
+  \node[font=\scriptsize\bfseries,text=Grey] at (13.7,-.48) {FUTUR};
+\end{tikzpicture}%
+}
+
+\begin{document}
+\PageFrame
+
+% ------------------------------------------------------------
+% TITRE
+% ------------------------------------------------------------
+\vspace*{1mm}
+\begin{center}
+  {\fontsize{25}{27}\selectfont\bfseries\textcolor{Ink}{FUTUR ANTÉRIEUR}}
+
+  \vspace{0.75mm}
+  {\large\textcolor{Grey}{Le futur antérieur}}
+
+  \vspace{3mm}
+
+  \begin{tcolorbox}[
+    width=.88\textwidth,
+    colback=OrangeLight,
+    colframe=OrangeLight,
+    boxrule=0pt,
+    arc=3mm,
+    halign=center,
+    top=2.2mm,bottom=2.2mm
+  ]
+    {\large\bfseries\textcolor{OrangeDark}{AUXILIAIRE AU FUTUR SIMPLE + PARTICIPE PASSÉ}}
+  \end{tcolorbox}
+\end{center}
+
+\vspace{1mm}
+
+% ------------------------------------------------------------
+% TIMELINE
+% ------------------------------------------------------------
+\begin{bluebox}
+  \sectiontitle{Orange}{La ligne du temps}
+
+  \vspace{0.75mm}
+  \begin{center}
+    \Timeline
+  \end{center}
+
+  \vspace{-1mm}
+  \begin{center}
+    \small
+    Le \textbf{futur antérieur} présente une action
+    \textbf{\textcolor{Orange}{qui sera terminée avant un autre moment futur}}.
+  \end{center}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% CONSTRUCTION
+% ------------------------------------------------------------
+\begin{bluebox}
+  \sectiontitle{Orange}{Construction}
+
+  \vspace{0.75mm}
+  \begin{tabularx}{\textwidth}{@{}p{.29\textwidth} X@{}}
+    \textbf{Auxiliaire} &
+      \textbf{avoir} ou \textbf{être} au futur simple.\\
+    \textbf{Participe passé} &
+      \textbf{j'aurai fini}, \textbf{nous serons partis}, \textbf{elle aura compris}.\\
+    \textbf{Formule} &
+      \textbf{AUXILIAIRE AU FUTUR SIMPLE + PARTICIPE PASSÉ}.
+  \end{tabularx}
+
+  \vspace{0.7mm}
+  \textit{Avec \textbf{être}, le participe passé s'accorde avec le sujet.}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% EXEMPLES / ATTENTION
+% ------------------------------------------------------------
+\begin{minipage}[t]{.485\textwidth}
+\begin{bluebox}
+  \sectiontitle{Orange}{Exemples}
+
+  \vspace{0.75mm}
+  Quand tu arriveras, j'\textbf{aurai déjà fini}.\\[-1mm]
+  Nous \textbf{serons partis} avant la nuit.\\[-1mm]
+  Elle \textbf{aura terminé} son travail à 18 heures.
+\end{bluebox}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.485\textwidth}
+\begin{redbox}
+  \sectiontitle{Red}{Attention !}
+
+  \vspace{0.75mm}
+  Le futur antérieur exprime une action
+  \textbf{achevée avant un repère futur}.
+
+  \vspace{0.4mm}
+  Ne pas le confondre avec le futur simple :
+  \textbf{j'aurai fini} / \textbf{je finirai}.
+\end{redbox}
+\end{minipage}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% USES
+% ------------------------------------------------------------
+\begin{bluebox}
+  \sectiontitle{Orange}{Quand utilise-t-on le futur antérieur ?}
+
+  \vspace{0.75mm}
+  \begin{tabularx}{\textwidth}{@{}p{.31\textwidth} X@{}}
+    \pill{ANTÉRIORITÉ} &
+      Action terminée avant une autre action future.
+      \newline \textit{Quand tu viendras, j'aurai terminé.}\\[0.7mm]
+
+    \pill{RÉSULTAT FUTUR} &
+      Résultat qui sera obtenu à un moment futur.
+      \newline \textit{À midi, nous aurons fini.}\\[0.7mm]
+
+    \pill{ÉCHÉANCE} &
+      Action accomplie avant une limite ou une date future.
+      \newline \textit{D'ici vendredi, elle aura répondu.}\\[0.7mm]
+
+    \pill{CHRONOLOGIE} &
+      Première action dans une succession d'événements futurs.
+      \newline \textit{Quand il sera parti, nous commencerons.}
+  \end{tabularx}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% COMPARISON
+% ------------------------------------------------------------
+\begin{whitebox}
+  \sectiontitle{Orange}{Futur antérieur ou futur simple ?}
+
+  \vspace{0.65mm}
+  \begin{tabularx}{\textwidth}{@{}p{.45\textwidth} X@{}}
+    \textbf{\textcolor{Orange}{Futur antérieur}} &
+      \textbf{\textcolor{Grey}{Futur simple}}\\
+    action terminée avant un repère futur &
+      action située dans l'avenir\\[-.2mm]
+    \textit{J'aurai fini à 18 h.} &
+      \textit{Je finirai à 18 h.}
+  \end{tabularx}
+\end{whitebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% SIGNAL WORDS
+% ------------------------------------------------------------
+\begin{goldbox}
+  \begin{center}
+    {\normalsize\bfseries\textcolor{Gold}{REPÈRES FRÉQUENTS DANS LE FUTUR}}
+    \hspace{2mm}
+    \signalpill{d'ici demain}\hspace{1mm}
+    \signalpill{avant ce soir}\hspace{1mm}
+    \signalpill{à midi}
+
+    \vspace{0.75mm}
+
+    \signalpill{d'ici vendredi}\hspace{1mm}
+    \signalpill{quand}\hspace{1mm}
+    \signalpill{lorsque}\hspace{1mm}
+    \signalpill{dès que}
+  \end{center}
+\end{goldbox}
+
+\end{document}

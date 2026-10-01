@@ -1,0 +1,319 @@
+
+% ============================================================
+% FRENCH TENSES — PASSÉ SIMPLE
+% Version graphique LaTeX/TikZ
+% Compilation : XeLaTeX
+% ============================================================
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[a4paper,top=9mm,bottom=8mm,left=11mm,right=11mm]{geometry}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{microtype}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage[most]{tcolorbox}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[normalem]{ulem}
+
+\setmainfont{Noto Sans}
+\setsansfont{Noto Sans}
+
+% ------------------------------------------------------------
+% PALETTE — PASSÉ = BLEU
+% ------------------------------------------------------------
+\definecolor{Blue}{HTML}{356FA8}
+\definecolor{BlueDark}{HTML}{244D78}
+\definecolor{BlueLight}{HTML}{EAF2F9}
+\definecolor{BlueLine}{HTML}{9BBBD7}
+\definecolor{Border}{HTML}{B9D3E3}
+
+\definecolor{Red}{HTML}{D52F35}
+\definecolor{RedLight}{HTML}{FCEBED}
+\definecolor{Gold}{HTML}{B27A00}
+\definecolor{GoldLight}{HTML}{FFF3D7}
+\definecolor{Ink}{HTML}{172A32}
+\definecolor{Grey}{HTML}{64757D}
+\definecolor{White}{HTML}{FFFFFF}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{3pt}
+
+% ------------------------------------------------------------
+% CADRE
+% ------------------------------------------------------------
+\newcommand{\PageFrame}{%
+\begin{tikzpicture}[remember picture,overlay]
+  \coordinate (A) at ([xshift=8mm,yshift=-8mm]current page.north west);
+  \coordinate (B) at ([xshift=-8mm,yshift=-8mm]current page.north east);
+  \coordinate (C) at ([xshift=-8mm,yshift=8mm]current page.south east);
+  \coordinate (D) at ([xshift=8mm,yshift=8mm]current page.south west);
+  \def\r{1.7mm}
+
+  \draw[Border,line width=.65pt]
+    (A)
+    -- ([xshift=-\r]B)
+    arc[start angle=90,end angle=0,radius=\r]
+    -- ([yshift=\r]C)
+    arc[start angle=0,end angle=-90,radius=\r]
+    -- (D) -- cycle;
+
+  \draw[Blue,line width=3.2mm] (A) -- (D);
+\end{tikzpicture}%
+}
+
+% ------------------------------------------------------------
+% BOÎTES
+% ------------------------------------------------------------
+\tcbset{
+  enhanced,
+  boxrule=.6pt,
+  arc=2.8mm,
+  left=3.7mm,right=3.7mm,top=1.75mm,bottom=1.75mm,
+  boxsep=1mm,
+  coltext=Ink
+}
+
+\newtcolorbox{bluebox}{colback=BlueLight,colframe=BlueLine}
+\newtcolorbox{redbox}{colback=RedLight,colframe=Border}
+\newtcolorbox{whitebox}{colback=White,colframe=Border}
+\newtcolorbox{goldbox}{
+  colback=GoldLight,colframe=GoldLight,
+  boxrule=0pt,arc=2.5mm,
+  left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm
+}
+
+\newcommand{\sectiontitle}[2]{%
+  {\large\bfseries\textcolor{#1}{#2}}%
+}
+
+\newcommand{\pill}[2][BlueLight]{%
+  \tikz[baseline=(X.base)]{
+    \node[
+      fill=#1,rounded corners=2pt,
+      inner xsep=4.2pt,inner ysep=1.6pt,
+      font=\small\bfseries,text=Ink
+    ] (X) {#2};
+  }%
+}
+
+\newcommand{\signalpill}[1]{%
+  \tikz[baseline=(X.base)]{
+    \node[
+      fill=GoldLight,rounded corners=2pt,
+      inner xsep=3.7pt,inner ysep=1.1pt,
+      font=\scriptsize\bfseries,text=Ink
+    ] (X) {#1};
+  }%
+}
+
+% ------------------------------------------------------------
+% TIMELINE
+% ------------------------------------------------------------
+\newcommand{\Timeline}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \draw[-{Latex[length=3mm]},very thick,Ink] (0,0) -- (15.3,0);
+
+  \draw[-{Latex[length=3mm,width=2mm]},very thick,Blue]
+    (10.0,1.10) -- (10.0,.10);
+  \node[font=\bfseries\small,text=Blue] at (10.0,1.32) {MAINTENANT};
+
+  \fill[Blue] (3.5,0) circle (3.2pt);
+  \fill[Blue] (5.2,0) circle (3.2pt);
+  \fill[Blue] (6.9,0) circle (3.2pt);
+  \draw[Blue,line width=2.2pt] (3.5,0) -- (6.9,0);
+
+  \node[
+    fill=BlueLight,rounded corners=2pt,
+    inner xsep=5pt,inner ysep=2pt,
+    font=\scriptsize\bfseries,text=BlueDark
+  ] at (5.2,.72) {événements achevés};
+
+  \node[font=\scriptsize\bfseries,text=Grey] at (5.2,-.55)
+    {succession dans le récit};
+
+  \node[font=\scriptsize\bfseries,text=Grey] at (2.2,-.48) {PASSÉ};
+  \node[font=\scriptsize\bfseries,text=Blue] at (10.0,-.48) {PRÉSENT};
+  \node[font=\scriptsize\bfseries,text=Grey] at (13.5,-.48) {FUTUR};
+\end{tikzpicture}%
+}
+
+\begin{document}
+\PageFrame
+
+% ------------------------------------------------------------
+% TITRE
+% ------------------------------------------------------------
+\vspace*{1mm}
+\begin{center}
+  {\fontsize{25}{27}\selectfont\bfseries\textcolor{Ink}{PASSÉ SIMPLE}}
+
+  \vspace{0.75mm}
+  {\large\textcolor{Grey}{Le passé simple}}
+
+  \vspace{3mm}
+
+  \begin{tcolorbox}[
+    width=.88\textwidth,
+    colback=BlueLight,
+    colframe=BlueLight,
+    boxrule=0pt,
+    arc=3mm,
+    halign=center,
+    top=2.2mm,bottom=2.2mm
+  ]
+    {\large\bfseries\textcolor{BlueDark}{RADICAL + TERMINAISONS DU PASSÉ SIMPLE}}
+  \end{tcolorbox}
+\end{center}
+
+\vspace{1mm}
+
+% ------------------------------------------------------------
+% TIMELINE
+% ------------------------------------------------------------
+\begin{bluebox}
+  \sectiontitle{Blue}{La ligne du temps}
+
+  \vspace{0.75mm}
+  \begin{center}
+    \Timeline
+  \end{center}
+
+  \vspace{-1mm}
+  \begin{center}
+    \small
+    Le \textbf{passé simple} présente des actions
+    \textbf{\textcolor{Blue}{achevées et successives dans un récit passé}}.
+  \end{center}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% CONSTRUCTION
+% ------------------------------------------------------------
+\begin{bluebox}
+  \sectiontitle{Blue}{Construction}
+
+  \vspace{0.75mm}
+  \begin{tabularx}{\textwidth}{@{}p{.29\textwidth} X@{}}
+    \textbf{Verbes en \textit{-er}} &
+      Je \textbf{parlai}. \qquad Tu \textbf{parlas}. \qquad Ils \textbf{parlèrent}.\\
+    \textbf{Terminaisons fréquentes} &
+      \textbf{-ai, -as, -a, -âmes, -âtes, -èrent}.\\
+    \textbf{Verbes irréguliers} &
+      Il \textbf{fut}, il \textbf{eut}, il \textbf{fit}, il \textbf{vint}.
+  \end{tabularx}
+
+  \vspace{0.7mm}
+  \textit{Les formes varient selon le groupe et le verbe : de nombreux verbes ont un radical irrégulier.}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% EXEMPLES / ATTENTION
+% ------------------------------------------------------------
+\begin{minipage}[t]{.485\textwidth}
+\begin{bluebox}
+  \sectiontitle{Blue}{Exemples}
+
+  \vspace{0.75mm}
+  Il \textbf{entra} dans la pièce.\\[-1mm]
+  Soudain, la porte \textbf{s'ouvrit}.\\[-1mm]
+  Elle \textbf{prit} le livre, le \textbf{feuilleta} puis le \textbf{posa}.
+\end{bluebox}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.485\textwidth}
+\begin{redbox}
+  \sectiontitle{Red}{Attention !}
+
+  \vspace{0.75mm}
+  Le passé simple est surtout employé
+  \textbf{dans les récits écrits et littéraires}.
+
+  \vspace{0.4mm}
+  À l'oral courant, on emploie généralement
+  le \textbf{passé composé} à sa place.
+\end{redbox}
+\end{minipage}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% USES
+% ------------------------------------------------------------
+\begin{bluebox}
+  \sectiontitle{Blue}{Quand utilise-t-on le passé simple ?}
+
+  \vspace{0.75mm}
+  \begin{tabularx}{\textwidth}{@{}p{.31\textwidth} X@{}}
+    \pill{RÉCIT ÉCRIT}
+      &
+      Temps privilégié de nombreux récits littéraires et historiques.
+      \newline \textit{Le roi entra dans la salle.}\\[0.7mm]
+
+    \pill{ACTION ACHEVÉE}
+      &
+      Événement ponctuel, terminé et délimité dans le passé.
+      \newline \textit{Il ouvrit la porte et regarda dehors.}\\[0.7mm]
+
+    \pill{PREMIER PLAN}
+      &
+      Fait avancer l'action principale du récit.
+      \newline \textit{Elle prit son sac et partit.}\\[0.7mm]
+
+    \pill{SUCCESSION}
+      &
+      Plusieurs actions peuvent se suivre dans la narration.
+      \newline \textit{Il se leva, s'habilla puis sortit.}
+  \end{tabularx}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% COMPARISON
+% ------------------------------------------------------------
+\begin{whitebox}
+  \sectiontitle{Blue}{Passé simple ou imparfait ?}
+
+  \vspace{0.65mm}
+  \begin{tabularx}{\textwidth}{@{}p{.45\textwidth} X@{}}
+    \textbf{\textcolor{Blue}{Passé simple}} &
+      \textbf{\textcolor{Grey}{Imparfait}}\\
+    événement, action de premier plan &
+      description, durée ou arrière-plan\\[-.2mm]
+    \textit{Il entra dans la maison.} &
+      \textit{Il faisait nuit.}
+  \end{tabularx}
+\end{whitebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% SIGNAL WORDS
+% ------------------------------------------------------------
+\begin{goldbox}
+  \begin{center}
+    {\normalsize\bfseries\textcolor{Gold}{REPÈRES FRÉQUENTS DANS LES RÉCITS}}
+    \hspace{2mm}
+    \signalpill{soudain}\hspace{1mm}
+    \signalpill{alors}\hspace{1mm}
+    \signalpill{tout à coup}
+
+    \vspace{0.75mm}
+
+    \signalpill{ce jour-là}\hspace{1mm}
+    \signalpill{puis}\hspace{1mm}
+    \signalpill{enfin}\hspace{1mm}
+    \signalpill{lorsque}
+  \end{center}
+\end{goldbox}
+
+\end{document}

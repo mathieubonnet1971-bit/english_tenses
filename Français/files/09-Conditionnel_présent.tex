@@ -1,0 +1,160 @@
+
+\documentclass[a4paper,11pt]{article}
+\usepackage{fontspec}
+\setmainfont{Noto Sans}
+\usepackage[french]{babel}
+\usepackage{microtype}
+\usepackage[top=9mm,bottom=8mm,left=11mm,right=11mm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage[most]{tcolorbox}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{ulem}
+\pagestyle{empty}
+
+\definecolor{Violet}{HTML}{7A5AA6}
+\definecolor{VioletDark}{HTML}{563A7A}
+\definecolor{VioletLight}{HTML}{F2ECF8}
+\definecolor{VioletLine}{HTML}{B9A5D0}
+\definecolor{Border}{HTML}{D3C4E2}
+\definecolor{Ink}{HTML}{172A32}
+\definecolor{Grey}{HTML}{64757D}
+\definecolor{Red}{HTML}{D52F35}
+\definecolor{RedLight}{HTML}{FCEBED}
+
+\tcbset{
+  enhanced,
+  boxrule=.6pt,
+  arc=2.8mm,
+  left=3.7mm,right=3.7mm,top=1.75mm,bottom=1.75mm,
+  boxsep=1mm,
+  coltext=Ink
+}
+
+\newtcolorbox{violetbox}[1][]{
+  colback=VioletLight,colframe=Border,#1
+}
+\newtcolorbox{warnbox}[1][]{
+  colback=RedLight,colframe=Red,
+  left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm,
+  #1
+}
+
+\begin{document}
+
+\begin{tikzpicture}[remember picture,overlay]
+  % cadre extérieur : angles gauches carrés, droits légèrement arrondis
+  \draw[draw=Border,line width=.9pt,rounded corners=1.7mm]
+    ([xshift=1mm,yshift=-1mm]current page.north west)
+    -- ([xshift=-1mm,yshift=-1mm]current page.north east)
+    -- ([xshift=-1mm,yshift=1mm]current page.south east)
+    -- ([xshift=1mm,yshift=1mm]current page.south west)
+    -- cycle;
+  % barre verticale
+  \fill[Violet] ([xshift=1mm,yshift=-1mm]current page.north west)
+    rectangle ([xshift=5.2mm,yshift=1mm]current page.south west);
+\end{tikzpicture}
+
+\vspace*{1mm}
+\hspace*{6mm}
+{\color{VioletDark}\fontsize{25}{27}\selectfont\bfseries CONDITIONNEL PRÉSENT}
+
+\vspace{0.5mm}
+\hspace*{6mm}
+{\color{Grey}\large Le conditionnel présent}
+
+\vspace{2.5mm}
+
+\hspace*{6mm}
+\begin{minipage}{0.91\textwidth}
+\begin{violetbox}
+\textbf{\color{VioletDark}CONSTRUCTION}\\[1mm]
+\centering
+{\Large \textbf{RADICAL DU FUTUR + TERMINAISONS DE L'IMPARFAIT}}\\[1mm]
+\small
+je \textbf{-ais}\quad tu \textbf{-ais}\quad il/elle \textbf{-ait}\quad
+nous \textbf{-ions}\quad vous \textbf{-iez}\quad ils/elles \textbf{-aient}
+\end{violetbox}
+
+\vspace{2.5mm}
+
+\begin{center}
+\begin{tikzpicture}[>=Latex]
+  \draw[Ink!65,line width=.8pt] (0,0) -- (15.1,0);
+  \node[below=2mm] at (2.0,0) {\small PASSÉ};
+  \node[below=2mm] at (7.5,0) {\small PRÉSENT};
+  \node[below=2mm] at (13.5,0) {\small FUTUR};
+  \draw[Violet,line width=2.5pt,->] (7.9,0) -- (12.9,0);
+  \node[above=3mm,align=center,text width=6.2cm] at (10.4,0)
+    {\small\bfseries possibilité, souhait, hypothèse, conseil};
+  \draw[VioletDark,line width=1.1pt,->] (7.5,1.0) -- (7.5,0.18);
+  \node[above=3.8mm] at (7.5,1.0) {\bfseries\color{VioletDark}MAINTENANT};
+\end{tikzpicture}
+\end{center}
+
+\vspace{1.5mm}
+
+\begin{violetbox}
+\textbf{\color{VioletDark}À QUOI SERT-IL ?}\\[1mm]
+\begin{itemize}
+\setlength{\itemsep}{0.4mm}
+\item exprimer une \textbf{hypothèse} ou une situation soumise à une condition ;
+\item exprimer un \textbf{souhait}, un désir ou un rêve ;
+\item donner un \textbf{conseil} ou formuler une demande avec atténuation ;
+\item exprimer une information présentée avec \textbf{prudence} ou incertitude.
+\end{itemize}
+\end{violetbox}
+
+\vspace{2mm}
+
+\begin{violetbox}
+\textbf{\color{VioletDark}EXEMPLES}\\[1mm]
+\textbf{Si j'avais le temps, je voyagerais davantage.}\\
+\textbf{J'aimerais visiter cette région.}\\
+\textbf{Tu pourrais fermer la fenêtre ?}\\
+\textbf{Il serait déjà parti.}
+\end{violetbox}
+
+\vspace{2mm}
+
+\begin{minipage}{0.485\textwidth}
+\begin{violetbox}[height=3.15cm]
+\textbf{\color{VioletDark}AVEC « SI »}\\[1mm]
+Une hypothèse au présent ou dans le futur se construit souvent avec :\\[1mm]
+\centering
+\textbf{SI + imparfait}\\
+$\downarrow$\\
+\textbf{conditionnel présent}\\[1mm]
+\raggedright
+\textit{Si j'avais plus de temps, je lirais davantage.}
+\end{violetbox}
+\end{minipage}
+\hfill
+\begin{minipage}{0.485\textwidth}
+\begin{warnbox}[height=3.15cm]
+\textbf{\color{Red}ATTENTION}\\[1mm]
+Après \textbf{si}, on ne met normalement pas le conditionnel dans ce type de phrase.\\[1mm]
+\textbf{Si j'avais...}\\
+\textcolor{Grey}{et non : \sout{Si j'aurais...}}
+\end{warnbox}
+\end{minipage}
+
+\vspace{2mm}
+
+\begin{violetbox}
+\textbf{\color{VioletDark}À RETENIR}\\[1mm]
+Le conditionnel présent sert à présenter une action comme \textbf{possible, souhaitée,
+hypothétique ou atténuée}. Il ne désigne pas simplement un « futur dans le passé » :
+sa valeur dépend du contexte.
+\end{violetbox}
+
+\vspace{1.5mm}
+
+\centering
+{\small\color{Grey}\textbf{Repères fréquents :} si, dans ce cas, à ta place, volontiers, peut-être, probablement, j'aimerais, je voudrais, je pourrais...}
+
+\end{minipage}
+
+\end{document}

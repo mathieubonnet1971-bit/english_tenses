@@ -1,0 +1,142 @@
+
+\documentclass[a4paper,11pt]{article}
+\usepackage{fontspec}
+\setmainfont{Noto Sans}
+\usepackage[french]{babel}
+\usepackage{microtype}
+\usepackage[top=9mm,bottom=8mm,left=11mm,right=11mm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage[most]{tcolorbox}
+\usepackage{ulem}
+\pagestyle{empty}
+
+\definecolor{Green}{HTML}{319B58}
+\definecolor{GreenDark}{HTML}{17613A}
+\definecolor{GreenLight}{HTML}{EAF6EC}
+\definecolor{GreenLine}{HTML}{8FC9A3}
+\definecolor{GreenBorder}{HTML}{B9D3C3}
+\definecolor{Orange}{HTML}{D8842F}
+\definecolor{OrangeDark}{HTML}{9A5716}
+\definecolor{OrangeLight}{HTML}{FFF1DF}
+\definecolor{OrangeLine}{HTML}{E7B77E}
+\definecolor{OrangeBorder}{HTML}{E7C7A6}
+\definecolor{Violet}{HTML}{7A5AA6}
+\definecolor{VioletDark}{HTML}{563A7A}
+\definecolor{VioletLight}{HTML}{F2ECF8}
+\definecolor{VioletLine}{HTML}{B9A5D0}
+\definecolor{VioletBorder}{HTML}{D3C4E2}
+\definecolor{Ink}{HTML}{172A32}
+\definecolor{Grey}{HTML}{64757D}
+\definecolor{Red}{HTML}{D52F35}
+\definecolor{RedLight}{HTML}{FCEBED}
+
+\tcbset{
+ enhanced,boxrule=.6pt,arc=2.8mm,
+ left=3.7mm,right=3.7mm,top=1.75mm,bottom=1.75mm,
+ boxsep=1mm,coltext=Ink
+}
+\newtcolorbox{greenbox}[1][]{colback=GreenLight,colframe=GreenBorder,#1}
+\newtcolorbox{orangebox}[1][]{colback=OrangeLight,colframe=OrangeBorder,#1}
+\newtcolorbox{violetbox}[1][]{colback=VioletLight,colframe=VioletBorder,#1}
+\newtcolorbox{warnbox}[1][]{colback=RedLight,colframe=Red,
+ left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm,#1}
+
+\begin{document}
+\begin{tikzpicture}[remember picture,overlay]
+\draw[draw=VioletBorder,line width=.9pt,rounded corners=1.7mm]
+ ([xshift=1mm,yshift=-1mm]current page.north west)
+ -- ([xshift=-1mm,yshift=-1mm]current page.north east)
+ -- ([xshift=-1mm,yshift=1mm]current page.south east)
+ -- ([xshift=1mm,yshift=1mm]current page.south west)--cycle;
+\fill[Violet] ([xshift=1mm,yshift=-1mm]current page.north west)
+ rectangle ([xshift=5.2mm,yshift=1mm]current page.south west);
+\end{tikzpicture}
+
+\vspace*{1mm}\hspace*{6mm}
+{\color{VioletDark}\fontsize{25}{27}\selectfont\bfseries CONDITIONNEL PASSÉ}
+
+\vspace{0.5mm}\hspace*{6mm}
+{\color{Grey}\large Le conditionnel passé}
+
+\vspace{2.5mm}\hspace*{6mm}
+\begin{minipage}{0.91\textwidth}
+
+\begin{violetbox}
+\textbf{\color{VioletDark}CONSTRUCTION}\\[1mm]
+\centering
+{\Large \textbf{AUXILIAIRE AU CONDITIONNEL PRÉSENT + PARTICIPE PASSÉ}}\\[1mm]
+\small
+\textit{j'aurais parlé \quad je serais parti(e)}
+\end{violetbox}
+
+\vspace{2.5mm}
+\begin{center}
+\begin{tikzpicture}[>=Latex]
+\draw[Ink!65,line width=.8pt] (0,0)--(15.1,0);
+\node[below=2mm] at (2.0,0) {\small PASSÉ};
+\node[below=2mm] at (7.5,0) {\small PRÉSENT};
+\node[below=2mm] at (13.5,0) {\small FUTUR};
+\draw[Violet,line width=2.5pt,->] (2.6,0)--(6.4,0);
+\draw[VioletDark,line width=1.1pt,->] (7.5,1.0)--(7.5,.18);
+\node[above=3.8mm] at (7.5,1.0) {\bfseries\color{VioletDark}MAINTENANT};
+\node[above=3mm,align=center,text width=6.2cm] at (4.5,0)
+{\small\bfseries action passée non réalisée, hypothétique ou dépendante d'une condition};
+\end{tikzpicture}
+\end{center}
+
+\vspace{1.5mm}
+\begin{violetbox}
+\textbf{\color{VioletDark}À QUOI SERT-IL ?}\\[1mm]
+\begin{itemize}\setlength{\itemsep}{0.4mm}
+\item exprimer une \textbf{action passée qui ne s'est pas réalisée} ;
+\item exprimer un \textbf{regret} ou un reproche ;
+\item présenter une hypothèse portant sur un fait passé ;
+\item rapporter une information passée avec \textbf{prudence} ou réserve.
+\end{itemize}
+\end{violetbox}
+
+\vspace{2mm}
+\begin{violetbox}
+\textbf{\color{VioletDark}EXEMPLES}\\[1mm]
+\textbf{Si j'avais su, je serais venu plus tôt.}\\
+\textbf{J'aurais aimé vous prévenir.}\\
+\textbf{Elle aurait pu nous aider.}\\
+\textbf{Ils seraient partis avant notre arrivée.}
+\end{violetbox}
+
+\vspace{2mm}
+\begin{minipage}{0.485\textwidth}
+\begin{violetbox}[height=3.25cm]
+\textbf{\color{VioletDark}AVEC « SI »}\\[1mm]
+Pour une hypothèse irréelle dans le passé :\\[1mm]
+\centering
+\textbf{SI + plus-que-parfait}\\
+$\downarrow$\\
+\textbf{conditionnel passé}\\[1mm]
+\raggedright
+\textit{Si j'avais su, je serais venu.}
+\end{violetbox}
+\end{minipage}\hfill
+\begin{minipage}{0.485\textwidth}
+\begin{warnbox}[height=3.25cm]
+\textbf{\color{Red}ATTENTION}\\[1mm]
+Après \textbf{si}, on n'emploie normalement pas le conditionnel dans cette construction.\\[1mm]
+\textbf{Si j'avais su...}\\
+\textcolor{Grey}{et non : \sout{Si j'aurais su...}}
+\end{warnbox}
+\end{minipage}
+
+\vspace{2mm}
+\begin{violetbox}
+\textbf{\color{VioletDark}À RETENIR}\\[1mm]
+Le conditionnel passé présente une action passée comme \textbf{hypothétique, non réalisée,
+regrettée ou dépendante d'une condition}. Avec \textbf{être}, le participe passé s'accorde avec le sujet.
+\end{violetbox}
+
+\vspace{1.5mm}\centering
+{\small\color{Grey}\textbf{Repères fréquents :} si, sans, sinon, heureusement, malheureusement, à ta place, j'aurais dû, j'aurais aimé...}
+
+\end{minipage}
+\end{document}

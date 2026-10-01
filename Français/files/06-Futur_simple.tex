@@ -1,0 +1,319 @@
+
+% ============================================================
+% FRENCH TENSES — FUTUR SIMPLE
+% Version graphique LaTeX/TikZ
+% Compilation : XeLaTeX
+% ============================================================
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[a4paper,top=9mm,bottom=8mm,left=11mm,right=11mm]{geometry}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{microtype}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage[most]{tcolorbox}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[normalem]{ulem}
+
+\setmainfont{Noto Sans}
+\setsansfont{Noto Sans}
+
+% ------------------------------------------------------------
+% PALETTE — FUTUR = ORANGE
+% ------------------------------------------------------------
+\definecolor{Orange}{HTML}{D8842F}
+\definecolor{OrangeDark}{HTML}{9A5716}
+\definecolor{OrangeLight}{HTML}{FFF1DF}
+\definecolor{OrangeLine}{HTML}{E7B77E}
+\definecolor{Border}{HTML}{E7C7A6}
+
+\definecolor{Red}{HTML}{D52F35}
+\definecolor{RedLight}{HTML}{FCEBED}
+\definecolor{Gold}{HTML}{B27A00}
+\definecolor{GoldLight}{HTML}{FFF3D7}
+\definecolor{Ink}{HTML}{172A32}
+\definecolor{Grey}{HTML}{64757D}
+\definecolor{White}{HTML}{FFFFFF}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{3pt}
+
+% ------------------------------------------------------------
+% CADRE
+% ------------------------------------------------------------
+\newcommand{\PageFrame}{%
+\begin{tikzpicture}[remember picture,overlay]
+  \coordinate (A) at ([xshift=8mm,yshift=-8mm]current page.north west);
+  \coordinate (B) at ([xshift=-8mm,yshift=-8mm]current page.north east);
+  \coordinate (C) at ([xshift=-8mm,yshift=8mm]current page.south east);
+  \coordinate (D) at ([xshift=8mm,yshift=8mm]current page.south west);
+  \def\r{1.7mm}
+
+  \draw[Border,line width=.65pt]
+    (A)
+    -- ([xshift=-\r]B)
+    arc[start angle=90,end angle=0,radius=\r]
+    -- ([yshift=\r]C)
+    arc[start angle=0,end angle=-90,radius=\r]
+    -- (D) -- cycle;
+
+  \draw[Orange,line width=3.2mm] (A) -- (D);
+\end{tikzpicture}%
+}
+
+% ------------------------------------------------------------
+% BOÎTES
+% ------------------------------------------------------------
+\tcbset{
+  enhanced,
+  boxrule=.6pt,
+  arc=2.8mm,
+  left=3.7mm,right=3.7mm,top=1.75mm,bottom=1.75mm,
+  boxsep=1mm,
+  coltext=Ink
+}
+
+\newtcolorbox{bluebox}{colback=OrangeLight,colframe=OrangeLine}
+\newtcolorbox{redbox}{colback=RedLight,colframe=Border}
+\newtcolorbox{whitebox}{colback=White,colframe=Border}
+\newtcolorbox{goldbox}{
+  colback=GoldLight,colframe=GoldLight,
+  boxrule=0pt,arc=2.5mm,
+  left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm
+}
+
+\newcommand{\sectiontitle}[2]{%
+  {\large\bfseries\textcolor{#1}{#2}}%
+}
+
+\newcommand{\pill}[2][OrangeLight]{%
+  \tikz[baseline=(X.base)]{
+    \node[
+      fill=#1,rounded corners=2pt,
+      inner xsep=4.2pt,inner ysep=1.6pt,
+      font=\small\bfseries,text=Ink
+    ] (X) {#2};
+  }%
+}
+
+\newcommand{\signalpill}[1]{%
+  \tikz[baseline=(X.base)]{
+    \node[
+      fill=GoldLight,rounded corners=2pt,
+      inner xsep=3.7pt,inner ysep=1.1pt,
+      font=\scriptsize\bfseries,text=Ink
+    ] (X) {#1};
+  }%
+}
+
+% ------------------------------------------------------------
+% TIMELINE
+% ------------------------------------------------------------
+\newcommand{\Timeline}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \draw[-{Latex[length=3mm]},very thick,Ink] (0,0) -- (15.3,0);
+
+  \draw[-{Latex[length=3mm,width=2mm]},very thick,Orange]
+    (8.2,1.10) -- (8.2,.10);
+  \node[font=\bfseries\small,text=Orange] at (8.2,1.32) {MAINTENANT};
+
+  \draw[Orange,line width=2.2pt] (9.5,0) -- (13.2,0);
+  \fill[Orange] (9.5,0) circle (3.2pt);
+  \fill[Orange] (11.3,0) circle (3.2pt);
+  \fill[Orange] (13.2,0) circle (3.2pt);
+
+  \node[
+    fill=OrangeLight,rounded corners=2pt,
+    inner xsep=5pt,inner ysep=2pt,
+    font=\scriptsize\bfseries,text=OrangeDark
+  ] at (11.3,.72) {actions à venir};
+
+  \node[font=\scriptsize\bfseries,text=Grey] at (11.3,-.55)
+    {projetées dans l'avenir};
+
+  \node[font=\scriptsize\bfseries,text=Grey] at (3.0,-.48) {PASSÉ};
+  \node[font=\scriptsize\bfseries,text=Orange] at (8.2,-.48) {PRÉSENT};
+  \node[font=\scriptsize\bfseries,text=Grey] at (13.7,-.48) {FUTUR};
+\end{tikzpicture}%
+}
+
+\begin{document}
+\PageFrame
+
+% ------------------------------------------------------------
+% TITRE
+% ------------------------------------------------------------
+\vspace*{1mm}
+\begin{center}
+  {\fontsize{25}{27}\selectfont\bfseries\textcolor{Ink}{FUTUR SIMPLE}}
+
+  \vspace{0.75mm}
+  {\large\textcolor{Grey}{Le futur simple}}
+
+  \vspace{3mm}
+
+  \begin{tcolorbox}[
+    width=.88\textwidth,
+    colback=OrangeLight,
+    colframe=OrangeLight,
+    boxrule=0pt,
+    arc=3mm,
+    halign=center,
+    top=2.2mm,bottom=2.2mm
+  ]
+    {\large\bfseries\textcolor{OrangeDark}{INFINITIF + TERMINAISONS DU FUTUR}}
+  \end{tcolorbox}
+\end{center}
+
+\vspace{1mm}
+
+% ------------------------------------------------------------
+% TIMELINE
+% ------------------------------------------------------------
+\begin{bluebox}
+  \sectiontitle{Orange}{La ligne du temps}
+
+  \vspace{0.75mm}
+  \begin{center}
+    \Timeline
+  \end{center}
+
+  \vspace{-1mm}
+  \begin{center}
+    \small
+    Le \textbf{futur simple} présente des actions
+    \textbf{\textcolor{Orange}{situées dans l'avenir, après le moment présent}}.
+  \end{center}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% CONSTRUCTION
+% ------------------------------------------------------------
+\begin{bluebox}
+  \sectiontitle{Orange}{Construction}
+
+  \vspace{0.75mm}
+  \begin{tabularx}{\textwidth}{@{}p{.29\textwidth} X@{}}
+    \textbf{Avec un verbe régulier} &
+      Je \textbf{parlerai}. \qquad Tu \textbf{finiras}. \qquad Ils \textbf{vendront}.\\
+    \textbf{Terminaisons} &
+      \textbf{-ai, -as, -a, -ons, -ez, -ont}.\\
+    \textbf{Radicaux irréguliers} &
+      J'\textbf{aurai}, je \textbf{serai}, je \textbf{ferai}, je \textbf{viendrai}.
+  \end{tabularx}
+
+  \vspace{0.7mm}
+  \textit{Pour les verbes réguliers, les terminaisons s'ajoutent à l'infinitif. Certains verbes ont un radical irrégulier.}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% EXEMPLES / ATTENTION
+% ------------------------------------------------------------
+\begin{minipage}[t]{.485\textwidth}
+\begin{bluebox}
+  \sectiontitle{Orange}{Exemples}
+
+  \vspace{0.75mm}
+  Demain, je \textbf{partirai} tôt.\\[-1mm]
+  Nous \textbf{visiterons} le village samedi.\\[-1mm]
+  Elle \textbf{finira} son travail ce soir.
+\end{bluebox}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.485\textwidth}
+\begin{redbox}
+  \sectiontitle{Red}{Attention !}
+
+  \vspace{0.75mm}
+  Ne pas confondre le futur simple
+  avec le \textbf{conditionnel} :
+  \textbf{je parlerai} / \textbf{je parlerais}.
+
+  \vspace{0.4mm}
+  À l'écrit, l'accent ou la terminaison
+  change le sens et la prononciation.
+\end{redbox}
+\end{minipage}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% USES
+% ------------------------------------------------------------
+\begin{bluebox}
+  \sectiontitle{Orange}{Quand utilise-t-on le futur simple ?}
+
+  \vspace{0.75mm}
+  \begin{tabularx}{\textwidth}{@{}p{.31\textwidth} X@{}}
+    \pill{AVENIR}
+      &
+      Action ou événement situé après le moment présent.
+      \newline \textit{Je partirai demain matin.}\\[0.7mm]
+
+    \pill{PRÉVISION}
+      &
+      Ce que l'on pense ou prévoit pour l'avenir.
+      \newline \textit{Il fera beau demain.}\\[0.7mm]
+
+    \pill{PROMESSE / ENGAGEMENT}
+      &
+      Promesse, engagement ou décision présentée comme future.
+      \newline \textit{Je t'aiderai demain.}\\[0.7mm]
+
+    \pill{FUTUR CERTAIN / PROGRAMMÉ}
+      &
+      Fait considéré comme devant se produire.
+      \newline \textit{La réunion commencera à 9 heures.}
+  \end{tabularx}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% COMPARISON
+% ------------------------------------------------------------
+\begin{whitebox}
+  \sectiontitle{Orange}{Futur simple ou futur proche ?}
+
+  \vspace{0.65mm}
+  \begin{tabularx}{\textwidth}{@{}p{.45\textwidth} X@{}}
+    \textbf{\textcolor{Orange}{Futur simple}} &
+      \textbf{\textcolor{Grey}{Futur proche}}\\
+    avenir envisagé ou présenté comme futur &
+      avenir proche, intention ou événement imminent\\[-.2mm]
+    \textit{Je partirai demain.} &
+      \textit{Je vais partir.}
+  \end{tabularx}
+\end{whitebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% SIGNAL WORDS
+% ------------------------------------------------------------
+\begin{goldbox}
+  \begin{center}
+    {\normalsize\bfseries\textcolor{Gold}{REPÈRES FRÉQUENTS}}
+    \hspace{2mm}
+    \signalpill{demain}\hspace{1mm}
+    \signalpill{bientôt}\hspace{1mm}
+    \signalpill{plus tard}
+
+    \vspace{0.75mm}
+
+    \signalpill{la semaine prochaine}\hspace{1mm}
+    \signalpill{dans deux jours}\hspace{1mm}
+    \signalpill{l'année prochaine}
+  \end{center}
+\end{goldbox}
+
+\end{document}

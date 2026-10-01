@@ -1,0 +1,283 @@
+% ============================================================
+% FRANÇAIS — PRÉSENT DE L'INDICATIF
+% Version graphique LaTeX/TikZ
+% Compilation : XeLaTeX
+% ============================================================
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[a4paper,top=9mm,bottom=8mm,left=11mm,right=11mm]{geometry}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{microtype}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage[most]{tcolorbox}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[normalem]{ulem}
+
+\setmainfont{Noto Sans}
+\setsansfont{Noto Sans}
+
+% ------------------------------------------------------------
+% PALETTE — PRÉSENT = VERT
+% ------------------------------------------------------------
+\definecolor{Green}{HTML}{319B58}
+\definecolor{GreenDark}{HTML}{17613A}
+\definecolor{GreenLight}{HTML}{EAF6EC}
+\definecolor{GreenLine}{HTML}{8FC9A3}
+\definecolor{Blue}{HTML}{17458F}
+\definecolor{BlueLight}{HTML}{E9F3FA}
+\definecolor{Red}{HTML}{D52F35}
+\definecolor{RedLight}{HTML}{FCEBED}
+\definecolor{Gold}{HTML}{B27A00}
+\definecolor{GoldLight}{HTML}{FFF3D7}
+\definecolor{Ink}{HTML}{172A32}
+\definecolor{Grey}{HTML}{64757D}
+\definecolor{Border}{HTML}{B9D3C3}
+\definecolor{White}{HTML}{FFFFFF}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{3pt}
+
+% ------------------------------------------------------------
+% CADRE EXTÉRIEUR
+% ------------------------------------------------------------
+\newcommand{\PageFrame}{%
+\begin{tikzpicture}[remember picture,overlay]
+  \coordinate (A) at ([xshift=8mm,yshift=-8mm]current page.north west);
+  \coordinate (B) at ([xshift=-8mm,yshift=-8mm]current page.north east);
+  \coordinate (C) at ([xshift=-8mm,yshift=8mm]current page.south east);
+  \coordinate (D) at ([xshift=8mm,yshift=8mm]current page.south west);
+  \def\r{1.7mm}
+
+  \draw[Border,line width=.65pt]
+    (A)
+    -- ([xshift=-\r]B)
+    arc[start angle=90,end angle=0,radius=\r]
+    -- ([yshift=\r]C)
+    arc[start angle=0,end angle=-90,radius=\r]
+    -- (D) -- cycle;
+
+  \draw[Green,line width=3.2mm] (A) -- (D);
+\end{tikzpicture}%
+}
+
+% ------------------------------------------------------------
+% BOÎTES
+% ------------------------------------------------------------
+\tcbset{
+  enhanced,
+  boxrule=.6pt,
+  arc=2.8mm,
+  left=4mm,right=4mm,top=2mm,bottom=2mm,
+  coltext=Ink
+}
+
+\newtcolorbox{timelinebox}{colback=White,colframe=GreenLine}
+\newtcolorbox{greenbox}{colback=GreenLight,colframe=GreenLine}
+\newtcolorbox{bluebox}{colback=BlueLight,colframe=Border}
+\newtcolorbox{redbox}{colback=RedLight,colframe=Border}
+\newtcolorbox{whitebox}{colback=White,colframe=Border}
+\newtcolorbox{goldbox}{colback=GoldLight,colframe=GoldLight,boxrule=0pt,arc=2.5mm,left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm}
+
+% ------------------------------------------------------------
+% PETITES ÉTIQUETTES
+% ------------------------------------------------------------
+\newcommand{\pill}[2][GreenLight]{%
+  \tikz[baseline=(X.base)]{\node[fill=#1,rounded corners=2pt,inner xsep=4.2pt,inner ysep=1.6pt,font=\small\bfseries,text=Ink] (X) {#2};}%
+}
+\newcommand{\sectiontitle}[2]{{\large\bfseries\textcolor{#1}{#2}}}
+\newcommand{\signalpill}[1]{%
+  \tikz[baseline=(X.base)]{\node[fill=GoldLight,rounded corners=2pt,inner xsep=3.7pt,inner ysep=1.1pt,font=\scriptsize\bfseries,text=Ink] (X) {#1};}%
+}
+
+% ------------------------------------------------------------
+% LIGNE DU TEMPS — PRÉSENT FRANÇAIS
+% ------------------------------------------------------------
+\newcommand{\Timeline}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \draw[-{Latex[length=3mm]},very thick,Ink] (0,0) -- (15.3,0);
+
+  % NOW : flèche séparée pointant vers la ligne
+  \draw[-{Latex[length=3mm,width=2mm]},very thick,Green]
+    (9.3,1.10) -- (9.3,.10);
+  \node[font=\bfseries\small,text=Green] at (9.3,1.32) {MAINTENANT};
+  \fill[Green] (9.3,0) circle (3.2pt);
+
+  % zone du présent : autour du moment présent
+  \draw[Green,line width=3.2pt] (8.35,0) -- (10.25,0);
+  \fill[Green] (8.35,0) circle (2.1pt);
+  \fill[Green] (10.25,0) circle (2.1pt);
+
+  \node[font=\scriptsize\bfseries,text=Grey] at (2.2,-.48) {PASSÉ};
+  \node[font=\scriptsize\bfseries,text=Green] at (9.3,-.48) {PRÉSENT};
+  \node[font=\scriptsize\bfseries,text=Grey] at (13.3,-.48) {FUTUR};
+
+  \node[fill=GreenLight,rounded corners=2pt,inner xsep=5pt,inner ysep=2pt,font=\scriptsize\bfseries,text=GreenDark]
+    at (4.25,.72) {action / état au présent};
+\end{tikzpicture}%
+}
+
+\begin{document}
+\PageFrame
+
+% ------------------------------------------------------------
+% TITRE
+% ------------------------------------------------------------
+\vspace*{1mm}
+\begin{center}
+  {\fontsize{25}{27}\selectfont\bfseries\textcolor{Ink}{PRÉSENT}}
+
+  \vspace{0.75mm}
+  {\large\textcolor{Grey}{Le présent de l'indicatif}}
+
+  \vspace{3mm}
+
+  \begin{tcolorbox}[
+    width=.88\textwidth,
+    colback=GreenLight,
+    colframe=GreenLight,
+    boxrule=0pt,
+    arc=3mm,
+    halign=center,
+    top=2.2mm,bottom=2.2mm
+  ]
+    {\large\bfseries\textcolor{GreenDark}{RADICAL + TERMINAISON DU PRÉSENT}}
+    \quad
+    {\small\textit{ex. : parl- + e, es, e, ons, ez, ent}}
+  \end{tcolorbox}
+\end{center}
+
+\vspace{1mm}
+
+% ------------------------------------------------------------
+% TIMELINE
+% ------------------------------------------------------------
+\begin{timelinebox}
+  \sectiontitle{Green}{La ligne du temps}
+
+  \vspace{0.75mm}
+  \begin{center}
+    \Timeline
+  \end{center}
+
+  \vspace{-1mm}
+  \begin{center}
+    \small
+    Le \textbf{présent} situe un fait \textbf{au moment présent},
+    ou le présente comme \textbf{habituel, général ou durable}.
+  \end{center}
+\end{timelinebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% FORMATION
+% ------------------------------------------------------------
+\begin{greenbox}
+  \sectiontitle{Green}{Formation — exemple : parler}
+
+  \vspace{0.75mm}
+  \begin{center}
+    \begin{tabular}{@{}c@{\qquad}c@{\qquad}c@{\qquad}c@{\qquad}c@{\qquad}c@{}}
+      je & tu & il / elle / on & nous & vous & ils / elles\\[-.2mm]
+      \textcolor{Green}{parle} & \textcolor{Green}{parles} & \textcolor{Green}{parle} &
+      \textcolor{Green}{parlons} & \textcolor{Green}{parlez} & \textcolor{Green}{parlent}
+    \end{tabular}
+  \end{center}
+
+  \vspace{0.5mm}
+  \begin{center}
+    \small\textcolor{Grey}{Pour les verbes en \textbf{-er}, les terminaisons sont :}
+    \quad
+    \textbf{-e \; -es \; -e \; -ons \; -ez \; -ent}
+  \end{center}
+\end{greenbox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% USES
+% ------------------------------------------------------------
+\begin{greenbox}
+  \sectiontitle{Green}{Quand utilise-t-on le présent ?}
+
+  \vspace{0.75mm}
+  \begin{tabularx}{\textwidth}{@{}p{.31\textwidth} X@{}}
+    \pill{ACTION EN COURS}
+      & Action qui se déroule maintenant.\newline
+        \textit{Je lis un livre.}\\[0.7mm]
+    \pill{HABITUDE / RÉPÉTITION}
+      & Action régulière ou habituelle.\newline
+        \textit{Nous allons au marché le samedi.}\\[0.7mm]
+    \pill{VÉRITÉ GÉNÉRALE}
+      & Fait considéré comme généralement vrai.\newline
+        \textit{L'eau bout à 100\,°C.}\\[0.7mm]
+    \pill{ÉTAT / SITUATION DURABLE}
+      & Situation, propriété ou état relativement stable.\newline
+        \textit{Paul habite à Albi.}
+  \end{tabularx}
+\end{greenbox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% EXAMPLES
+% ------------------------------------------------------------
+\begin{bluebox}
+  \sectiontitle{Blue}{Exemples}
+
+  \vspace{0.75mm}
+  \begin{tabularx}{\textwidth}{@{}X@{\hspace{7mm}}X@{}}
+    \textbf{Je travaille aujourd'hui.}
+    & \textbf{Nous mangeons souvent ensemble.}\\[-.5mm]
+    \textit{Action en cours.}
+    & \textit{Habitude.}\\[0.7mm]
+    \textbf{La Terre tourne autour du Soleil.}
+    & \textbf{Elle habite dans le Tarn.}\\[-.5mm]
+    \textit{Vérité générale.}
+    & \textit{Situation durable.}
+  \end{tabularx}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% POINT DE VIGILANCE
+% ------------------------------------------------------------
+\begin{redbox}
+  \textcolor{Red}{\bfseries !\quad À retenir :}
+  en français, le présent peut traduire plusieurs temps anglais.\quad
+  \textbf{Je travaille} peut signifier \textit{I work} ou \textit{I am working},
+  selon le contexte.
+\end{redbox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% MOTS REPÈRES
+% ------------------------------------------------------------
+\begin{goldbox}
+  \begin{center}
+    {\normalsize\bfseries\textcolor{Gold}{MOTS REPÈRES}}
+    \hspace{3mm}
+    \signalpill{maintenant}\hspace{1mm}
+    \signalpill{aujourd'hui}\hspace{1mm}
+    \signalpill{souvent}\hspace{1mm}
+    \signalpill{toujours}\hspace{1mm}
+    \signalpill{habituellement}
+
+    \vspace{0.75mm}
+
+    \signalpill{chaque jour}\hspace{1mm}
+    \signalpill{tous les jours}\hspace{1mm}
+    \signalpill{le lundi}\hspace{1mm}
+    \signalpill{en général}
+  \end{center}
+\end{goldbox}
+
+\end{document}

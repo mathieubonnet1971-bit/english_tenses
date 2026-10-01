@@ -1,0 +1,133 @@
+
+\documentclass[a4paper,11pt]{article}
+\usepackage{fontspec}
+\setmainfont{Noto Sans}
+\usepackage[french]{babel}
+\usepackage{microtype}
+\usepackage[top=9mm,bottom=8mm,left=11mm,right=11mm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage[most]{tcolorbox}
+\pagestyle{empty}
+
+\definecolor{Orange}{HTML}{D8842F}
+\definecolor{OrangeDark}{HTML}{9A5716}
+\definecolor{OrangeLight}{HTML}{FFF1DF}
+\definecolor{Border}{HTML}{E7C7A6}
+\definecolor{Ink}{HTML}{172A32}
+\definecolor{Grey}{HTML}{64757D}
+\definecolor{Red}{HTML}{D52F35}
+\definecolor{RedLight}{HTML}{FCEBED}
+
+\tcbset{
+ enhanced,boxrule=.6pt,arc=2.8mm,
+ left=3.7mm,right=3.7mm,top=1.75mm,bottom=1.75mm,
+ boxsep=1mm,coltext=Ink
+}
+\newtcolorbox{orangebox}[1][]{colback=OrangeLight,colframe=Border,#1}
+\newtcolorbox{warnbox}[1][]{colback=RedLight,colframe=Red,
+ left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm,#1}
+
+\begin{document}
+\begin{tikzpicture}[remember picture,overlay]
+\draw[draw=Border,line width=.9pt,rounded corners=1.7mm]
+ ([xshift=1mm,yshift=-1mm]current page.north west)
+ -- ([xshift=-1mm,yshift=-1mm]current page.north east)
+ -- ([xshift=-1mm,yshift=1mm]current page.south east)
+ -- ([xshift=1mm,yshift=1mm]current page.south west)--cycle;
+\fill[Orange] ([xshift=1mm,yshift=-1mm]current page.north west)
+ rectangle ([xshift=5.2mm,yshift=1mm]current page.south west);
+\end{tikzpicture}
+
+\vspace*{1mm}\hspace*{6mm}
+{\color{OrangeDark}\fontsize{25}{27}\selectfont\bfseries FUTUR DE L'INDICATIU}
+
+\vspace{0.5mm}\hspace*{6mm}
+{\color{Grey}\large Le futur de l'indicatif}
+
+\vspace{2.5mm}\hspace*{6mm}
+\begin{minipage}{0.91\textwidth}
+
+\begin{orangebox}
+\textbf{\color{OrangeDark}CONSTRUCCION}\\[1mm]
+\centering
+{\Large \textbf{INFINITIU + TERMINASONS DEL FUTUR}}\\[1mm]
+\small
+Exemple : \textbf{CANTAR}\\[1mm]
+\textbf{cantarai}\quad \textbf{cantaràs}\quad \textbf{cantarà}\quad
+\textbf{cantarem}\quad \textbf{cantaretz}\quad \textbf{cantaran}
+\end{orangebox}
+
+\vspace{2.5mm}
+\begin{center}
+\begin{tikzpicture}[>=Latex]
+\draw[Ink!65,line width=.8pt] (0,0)--(15.1,0);
+\node[below=2mm] at (2.0,0) {\small PASSAT};
+\node[below=2mm] at (7.5,0) {\small ARA};
+\node[below=2mm] at (13.5,0) {\small FUTUR};
+\draw[Orange,line width=2.5pt,->] (8.0,0)--(13.0,0);
+\draw[OrangeDark,line width=1.1pt,->] (7.5,1.0)--(7.5,.18);
+\node[above=3.8mm] at (7.5,1.0) {\bfseries\color{OrangeDark}ARA};
+\node[above=3mm,align=center,text width=6.2cm] at (10.5,0)
+{\small\bfseries accion futura, projècte o prediccion};
+\end{tikzpicture}
+\end{center}
+
+\vspace{1.5mm}
+\begin{orangebox}
+\textbf{\color{OrangeDark}A QUÉ SERVÍS ?}\\[1mm]
+\begin{itemize}\setlength{\itemsep}{0.4mm}
+\item parlar d'una accion situada \textbf{après lo moment present} ;
+\item exprimir un \textbf{projècte}, una decision o una promessa ;
+\item far una \textbf{prediccion} ;
+\item presentar un fach futur considerat coma segur o previst.
+\end{itemize}
+\end{orangebox}
+
+\vspace{2mm}
+\begin{orangebox}
+\textbf{\color{OrangeDark}EXEMPLES}\\[1mm]
+\textbf{Demà, partirai d'ora.}\\
+\textbf{Aquel estiu, trabalharem ensemble.}\\
+\textbf{Quand vendrà, li parlarai.}\\
+\textbf{Lo temps cambiarà lèu.}
+\end{orangebox}
+
+\vspace{2mm}
+\begin{minipage}{0.485\textwidth}
+\begin{orangebox}[height=3.25cm]
+\textbf{\color{OrangeDark}TERMINASONS}\\[1mm]
+\centering
+\textbf{-ai \quad -às \quad -à}\\
+\textbf{-em \quad -etz \quad -an}\\[1mm]
+\raggedright
+L'infinitiu servís de basa per fòrça vèrbs regulars.
+\end{orangebox}
+\end{minipage}\hfill
+\begin{minipage}{0.485\textwidth}
+\begin{warnbox}[height=3.25cm]
+\textbf{\color{Red}ATENCION}\\[1mm]
+Certans vèrbs an un \textbf{radical irregular} al futur.\\[1mm]
+Per exemple :\\
+\textbf{èsser → serai}\\
+\textbf{aver → aurai}\\
+\textbf{far → farai}
+\end{warnbox}
+\end{minipage}
+
+\vspace{2mm}
+\begin{orangebox}
+\textbf{\color{OrangeDark}A RETÉNER}\\[1mm]
+Lo futur de l'indicatiu permet de situar una accion \textbf{après ara}. Es frequent per parlar
+d'un projècte, d'una prediccion, d'una promessa o d'un eveniment futur.
+\end{orangebox}
+
+\vspace{1.5mm}\centering
+{\small\color{Grey}\textbf{Indicis frequents :} demà, lèu, lèu-lèu, la setmana que ven, l'an que ven, mai tard, un jorn, quand...}
+
+\vspace{1mm}
+{\scriptsize\color{Grey}Referéncia : occitan languedocian, graphia classica, vèrb'Òc / Lo Congrès permanent de la lenga occitana.}
+
+\end{minipage}
+\end{document}

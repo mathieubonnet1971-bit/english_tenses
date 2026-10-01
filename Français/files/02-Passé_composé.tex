@@ -1,0 +1,328 @@
+
+% ============================================================
+% FRENCH TENSES — PASSÉ COMPOSÉ
+% Version graphique LaTeX/TikZ
+% Compilation : XeLaTeX
+% ============================================================
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[a4paper,top=9mm,bottom=8mm,left=11mm,right=11mm]{geometry}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{microtype}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage[most]{tcolorbox}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[normalem]{ulem}
+
+\setmainfont{Noto Sans}
+\setsansfont{Noto Sans}
+
+% ------------------------------------------------------------
+% PALETTE — PASSÉ = BLEU
+% ------------------------------------------------------------
+\definecolor{Blue}{HTML}{356FA8}
+\definecolor{BlueDark}{HTML}{244D78}
+\definecolor{BlueLight}{HTML}{EAF2F9}
+\definecolor{BlueLine}{HTML}{9BBBD7}
+\definecolor{Border}{HTML}{B9D3E3}
+
+\definecolor{Red}{HTML}{D52F35}
+\definecolor{RedLight}{HTML}{FCEBED}
+\definecolor{Gold}{HTML}{B27A00}
+\definecolor{GoldLight}{HTML}{FFF3D7}
+\definecolor{Ink}{HTML}{172A32}
+\definecolor{Grey}{HTML}{64757D}
+\definecolor{White}{HTML}{FFFFFF}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{3pt}
+
+% ------------------------------------------------------------
+% CADRE
+% ------------------------------------------------------------
+\newcommand{\PageFrame}{%
+\begin{tikzpicture}[remember picture,overlay]
+  \coordinate (A) at ([xshift=8mm,yshift=-8mm]current page.north west);
+  \coordinate (B) at ([xshift=-8mm,yshift=-8mm]current page.north east);
+  \coordinate (C) at ([xshift=-8mm,yshift=8mm]current page.south east);
+  \coordinate (D) at ([xshift=8mm,yshift=8mm]current page.south west);
+  \def\r{1.7mm}
+
+  \draw[Border,line width=.65pt]
+    (A)
+    -- ([xshift=-\r]B)
+    arc[start angle=90,end angle=0,radius=\r]
+    -- ([yshift=\r]C)
+    arc[start angle=0,end angle=-90,radius=\r]
+    -- (D) -- cycle;
+
+  \draw[Blue,line width=3.2mm] (A) -- (D);
+\end{tikzpicture}%
+}
+
+% ------------------------------------------------------------
+% BOÎTES
+% ------------------------------------------------------------
+\tcbset{
+  enhanced,
+  boxrule=.6pt,
+  arc=2.8mm,
+  left=3.7mm,right=3.7mm,top=1.75mm,bottom=1.75mm,
+  boxsep=1mm,
+  coltext=Ink
+}
+
+\newtcolorbox{bluebox}{
+  colback=BlueLight,colframe=BlueLine
+}
+\newtcolorbox{redbox}{
+  colback=RedLight,colframe=Border
+}
+\newtcolorbox{whitebox}{
+  colback=White,colframe=Border
+}
+\newtcolorbox{goldbox}{
+  colback=GoldLight,colframe=GoldLight,
+  boxrule=0pt,arc=2.5mm,
+  left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm
+}
+
+\newcommand{\sectiontitle}[2]{%
+  {\large\bfseries\textcolor{#1}{#2}}%
+}
+
+\newcommand{\pill}[2][BlueLight]{%
+  \tikz[baseline=(X.base)]{
+    \node[
+      fill=#1,rounded corners=2pt,
+      inner xsep=4.2pt,inner ysep=1.6pt,
+      font=\small\bfseries,text=Ink
+    ] (X) {#2};
+  }%
+}
+
+\newcommand{\signalpill}[1]{%
+  \tikz[baseline=(X.base)]{
+    \node[
+      fill=GoldLight,rounded corners=2pt,
+      inner xsep=3.7pt,inner ysep=1.1pt,
+      font=\scriptsize\bfseries,text=Ink
+    ] (X) {#1};
+  }%
+}
+
+% ------------------------------------------------------------
+% TIMELINE — ACTION TERMINÉE DANS LE PASSÉ, LIÉE AU PRÉSENT
+% ------------------------------------------------------------
+\newcommand{\Timeline}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \draw[-{Latex[length=3mm]},very thick,Ink] (0,0) -- (15.3,0);
+
+  % NOW
+  \draw[-{Latex[length=3mm,width=2mm]},very thick,Blue]
+    (9.3,1.10) -- (9.3,.10);
+  \node[font=\bfseries\small,text=Blue] at (9.3,1.32) {MAINTENANT};
+
+  % Past completed action
+  \fill[Blue] (5.1,0) circle (3.2pt);
+  \draw[Blue,line width=2.2pt] (5.1,0) -- (9.0,0);
+
+  % subtle link to present
+  \draw[Blue!45,dashed,line width=.7pt] (5.1,0.18) -- (9.0,0.18);
+
+  \node[
+    fill=BlueLight,rounded corners=2pt,
+    inner xsep=5pt,inner ysep=2pt,
+    font=\scriptsize\bfseries,text=BlueDark
+  ] at (6.9,.72) {action terminée / lien avec le présent};
+
+  \node[font=\scriptsize\bfseries,text=Grey] at (2.2,-.48) {PASSÉ};
+  \node[font=\scriptsize\bfseries,text=Blue] at (9.3,-.48) {PRÉSENT};
+  \node[font=\scriptsize\bfseries,text=Grey] at (13.3,-.48) {FUTUR};
+\end{tikzpicture}%
+}
+
+\begin{document}
+\PageFrame
+
+% ------------------------------------------------------------
+% TITRE
+% ------------------------------------------------------------
+\vspace*{1mm}
+\begin{center}
+  {\fontsize{25}{27}\selectfont\bfseries\textcolor{Ink}{PASSÉ COMPOSÉ}}
+
+  \vspace{0.75mm}
+  {\large\textcolor{Grey}{Le passé composé}}
+
+  \vspace{3mm}
+
+  \begin{tcolorbox}[
+    width=.88\textwidth,
+    colback=BlueLight,
+    colframe=BlueLight,
+    boxrule=0pt,
+    arc=3mm,
+    halign=center,
+    top=2.2mm,bottom=2.2mm
+  ]
+    {\large\bfseries\textcolor{BlueDark}{AUXILIAIRE AU PRÉSENT + PARTICIPE PASSÉ}}
+    \quad
+    {\small(\textbf{avoir} ou \textbf{être})}
+  \end{tcolorbox}
+\end{center}
+
+\vspace{1mm}
+
+% ------------------------------------------------------------
+% TIMELINE
+% ------------------------------------------------------------
+\begin{bluebox}
+  \sectiontitle{Blue}{La ligne du temps}
+
+  \vspace{0.75mm}
+  \begin{center}
+    \Timeline
+  \end{center}
+
+  \vspace{-1mm}
+  \begin{center}
+    \small
+    Le \textbf{passé composé} exprime surtout une action
+    \textbf{\textcolor{Blue}{terminée}} dans le passé, souvent avec
+    \textbf{\textcolor{Blue}{un lien avec le présent}}.
+  \end{center}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% CONSTRUCTION
+% ------------------------------------------------------------
+\begin{bluebox}
+  \sectiontitle{Blue}{Construction}
+
+  \vspace{0.75mm}
+  \begin{tabularx}{\textwidth}{@{}p{.29\textwidth} X@{}}
+    \textbf{Avec avoir} &
+      J'\textbf{ai parlé}. \qquad Nous \textbf{avons fini}.\\
+    \textbf{Avec être} &
+      Elle \textbf{est partie}. \qquad Ils \textbf{sont arrivés}.
+  \end{tabularx}
+
+  \vspace{0.7mm}
+  \textit{La majorité des verbes se conjuguent avec \textbf{avoir}.}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% FORME / ACCORD
+% ------------------------------------------------------------
+\begin{minipage}[t]{.485\textwidth}
+\begin{bluebox}
+  \sectiontitle{Blue}{Exemples}
+
+  \vspace{0.75mm}
+  J'\textbf{ai travaillé}.\\[-1mm]
+  Tu \textbf{as compris}.\\[-1mm]
+  Nous \textbf{avons mangé}.\\[-1mm]
+  Elle \textbf{est arrivée}.
+\end{bluebox}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.485\textwidth}
+\begin{redbox}
+  \sectiontitle{Red}{Attention !}
+
+  \vspace{0.75mm}
+  Avec \textbf{être}, le participe passé
+  s'accorde avec le sujet :
+
+  \vspace{0.4mm}
+  Elle est arriv\textbf{ée}.\\[-1mm]
+  Ils sont arriv\textbf{és}.
+\end{redbox}
+\end{minipage}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% USES
+% ------------------------------------------------------------
+\begin{bluebox}
+  \sectiontitle{Blue}{Quand utilise-t-on le passé composé ?}
+
+  \vspace{0.75mm}
+  \begin{tabularx}{\textwidth}{@{}p{.31\textwidth} X@{}}
+    \pill{ACTION TERMINÉE}
+      &
+      Action achevée dans le passé.
+      \newline \textit{J'ai terminé mon travail.}\\[0.7mm]
+
+    \pill{ÉVÉNEMENT PONCTUEL}
+      &
+      Événement qui s'est produit à un moment donné.
+      \newline \textit{Il est arrivé à huit heures.}\\[0.7mm]
+
+    \pill{BILAN / EXPÉRIENCE}
+      &
+      Expérience ou bilan en rapport avec le présent.
+      \newline \textit{J'ai déjà vu ce film.}\\[0.7mm]
+
+    \pill{SUCCESSION D'ACTIONS}
+      &
+      Actions successives dans un récit.
+      \newline \textit{Il est entré, a posé son sac et s'est assis.}
+  \end{tabularx}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% COMPARISON
+% ------------------------------------------------------------
+\begin{whitebox}
+  \sectiontitle{Blue}{Passé composé ou imparfait ?}
+
+  \vspace{0.65mm}
+  \begin{tabularx}{\textwidth}{@{}p{.45\textwidth} X@{}}
+    \textbf{\textcolor{Blue}{Passé composé}} &
+      \textbf{\textcolor{Grey}{Imparfait}}\\
+    action terminée, événement &
+      description, habitude, durée en cours\\[-.2mm]
+    \textit{J'ai mangé.} &
+      \textit{Je mangeais.}
+  \end{tabularx}
+\end{whitebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% SIGNAL WORDS
+% ------------------------------------------------------------
+\begin{goldbox}
+  \begin{center}
+    {\normalsize\bfseries\textcolor{Gold}{REPÈRES FRÉQUENTS}}
+    \hspace{3mm}
+    \signalpill{hier}\hspace{1mm}
+    \signalpill{déjà}\hspace{1mm}
+    \signalpill{jamais}\hspace{1mm}
+    \signalpill{encore}
+
+    \vspace{0.75mm}
+
+    \signalpill{récemment}\hspace{1mm}
+    \signalpill{ce matin}\hspace{1mm}
+    \signalpill{la semaine dernière}\hspace{1mm}
+    \signalpill{tout à l'heure}
+  \end{center}
+\end{goldbox}
+
+\end{document}

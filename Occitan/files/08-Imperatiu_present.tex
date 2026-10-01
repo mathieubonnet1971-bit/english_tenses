@@ -1,0 +1,95 @@
+
+\documentclass[a4paper,11pt]{article}
+\usepackage{fontspec}
+\setmainfont{Noto Sans}
+\usepackage[french]{babel}
+\usepackage{microtype}
+\usepackage[top=9mm,bottom=8mm,left=11mm,right=11mm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage[most]{tcolorbox}
+\usepackage{ulem}
+\pagestyle{empty}
+
+\definecolor{Blue}{HTML}{356FA8}
+\definecolor{BlueDark}{HTML}{244D78}
+\definecolor{BlueLight}{HTML}{EAF2F9}
+\definecolor{BlueBorder}{HTML}{B9D3E3}
+\definecolor{Violet}{HTML}{7A5AA6}
+\definecolor{VioletDark}{HTML}{563A7A}
+\definecolor{VioletLight}{HTML}{F2ECF8}
+\definecolor{VioletBorder}{HTML}{D3C4E2}
+\definecolor{Neutral}{HTML}{6C7378}
+\definecolor{NeutralDark}{HTML}{42494D}
+\definecolor{NeutralLight}{HTML}{F0F2F3}
+\definecolor{NeutralBorder}{HTML}{C9CED1}
+\definecolor{Ink}{HTML}{172A32}
+\definecolor{Grey}{HTML}{64757D}
+\definecolor{Red}{HTML}{D52F35}
+\definecolor{RedLight}{HTML}{FCEBED}
+
+\tcbset{
+ enhanced,boxrule=.6pt,arc=2.8mm,
+ left=3.7mm,right=3.7mm,top=1.75mm,bottom=1.75mm,
+ boxsep=1mm,coltext=Ink
+}
+\newtcolorbox{bluebox}[1][]{colback=BlueLight,colframe=BlueBorder,#1}
+\newtcolorbox{violetbox}[1][]{colback=VioletLight,colframe=VioletBorder,#1}
+\newtcolorbox{neutralbox}[1][]{colback=NeutralLight,colframe=NeutralBorder,#1}
+\newtcolorbox{warnbox}[1][]{colback=RedLight,colframe=Red,
+ left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm,#1}
+
+\begin{document}
+\begin{tikzpicture}[remember picture,overlay]
+\draw[draw=NeutralBorder,line width=.9pt,rounded corners=1.7mm]
+([xshift=1mm,yshift=-1mm]current page.north west)--([xshift=-1mm,yshift=-1mm]current page.north east)--
+([xshift=-1mm,yshift=1mm]current page.south east)--([xshift=1mm,yshift=1mm]current page.south west)--cycle;
+\fill[Neutral]([xshift=1mm,yshift=-1mm]current page.north west) rectangle ([xshift=5.2mm,yshift=1mm]current page.south west);
+\end{tikzpicture}
+\vspace*{1mm}\hspace*{6mm}{\color{NeutralDark}\fontsize{25}{27}\selectfont\bfseries IMPERATIU PRESENT}
+\vspace{.5mm}\hspace*{6mm}{\color{Grey}\large L'impératif présent}
+\vspace{2.5mm}\hspace*{6mm}\begin{minipage}{.91\textwidth}
+\begin{neutralbox}\textbf{\color{NeutralDark}CONSTRUCCION}\\[1mm]\centering
+{\Large\textbf{FORMAS DE 2a PERSONA E DE 1a PLURAL}}\\[1mm]
+\small Exemple : \textbf{CANTAR} → \textbf{canta ! \quad cantem ! \quad cantatz !}
+\end{neutralbox}
+\vspace{2.5mm}\begin{center}\begin{tikzpicture}[>=Latex]
+\draw[Ink!65,line width=.8pt](0,0)--(15.1,0);
+\node[below=2mm]at(2,0){\small AVANT};\node[below=2mm]at(7.5,0){\small ARA};\node[below=2mm]at(13.5,0){\small APRÈS};
+\draw[Neutral,line width=2.5pt,->](7.1,0)--(8.1,0);
+\draw[NeutralDark,line width=1.1pt,->](7.5,1)--(7.5,.18);
+\node[above=3.8mm]at(7.5,1){\bfseries\color{NeutralDark}ARA};
+\node[above=3mm,align=center,text width=6.2cm]at(7.6,0){\small\bfseries òrdre, defensa, invitation, conselh};
+\end{tikzpicture}\end{center}
+\vspace{1.5mm}\begin{neutralbox}\textbf{\color{NeutralDark}A QUÉ SERVÍS ?}\\[1mm]
+\begin{itemize}\setlength{\itemsep}{.4mm}
+\item donar un \textbf{òrdre} o una instruccion;
+\item exprimir una defensa;
+\item convidar a far quicòm o a agir ensemble;
+\item donar un conselh o una recomandacion.
+\end{itemize}\end{neutralbox}
+\vspace{2mm}\begin{neutralbox}\textbf{\color{NeutralDark}EXEMPLES}\\[1mm]
+\textbf{Canta !}\\
+\textbf{Parla mai lentament !}\\
+\textbf{Anem !}\\
+\textbf{Escotatz !}
+\end{neutralbox}
+\vspace{2mm}
+\begin{minipage}{.485\textwidth}\begin{neutralbox}[height=3.15cm]
+\textbf{\color{NeutralDark}AFIRMATIU}\\[1mm]\centering
+\textbf{canta !}\\
+\textbf{cantem !}\\
+\textbf{cantatz !}
+\end{neutralbox}\end{minipage}\hfill
+\begin{minipage}{.485\textwidth}\begin{warnbox}[height=3.15cm]
+\textbf{\color{Red}NEGATIU}\\[1mm]
+L'imperatiu negatiu se construtz diferentament segon lo vèrb e lo modèl de conjugason.\\[1mm]
+\textit{Non cantes !}
+\end{warnbox}\end{minipage}
+\vspace{2mm}\begin{neutralbox}\textbf{\color{NeutralDark}A RETÉNER}\\[1mm]
+L'imperatiu es un \textbf{mode d'accion dirècta}. Lo Congrès lo classa coma « imperatiu present » e retien las formas de \textbf{2a persona singular, 1a e 2a personas plural}.
+\end{neutralbox}
+\vspace{1.5mm}\centering{\small\color{Grey}\textbf{Indicis frequents :} !, non, anem, mercé de, lèva-te, escotatz...}
+\vspace{1mm}{\scriptsize\color{Grey}Referéncia : occitan languedocian, graphia classica, vèrb'Òc / Lo Congrès.}
+\end{minipage}\end{document}

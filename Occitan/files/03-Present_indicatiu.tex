@@ -1,0 +1,136 @@
+
+\documentclass[a4paper,11pt]{article}
+\usepackage{fontspec}
+\setmainfont{Noto Sans}
+\usepackage[french]{babel}
+\usepackage{microtype}
+\usepackage[top=9mm,bottom=8mm,left=11mm,right=11mm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage[most]{tcolorbox}
+\pagestyle{empty}
+
+\definecolor{Green}{HTML}{319B58}
+\definecolor{GreenDark}{HTML}{17613A}
+\definecolor{GreenLight}{HTML}{EAF6EC}
+\definecolor{GreenLine}{HTML}{8FC9A3}
+\definecolor{Border}{HTML}{B9D3C3}
+\definecolor{Ink}{HTML}{172A32}
+\definecolor{Grey}{HTML}{64757D}
+\definecolor{Red}{HTML}{D52F35}
+\definecolor{RedLight}{HTML}{FCEBED}
+
+\tcbset{
+ enhanced,
+ boxrule=.6pt,
+ arc=2.8mm,
+ left=3.7mm,right=3.7mm,top=1.75mm,bottom=1.75mm,
+ boxsep=1mm,coltext=Ink
+}
+\newtcolorbox{greenbox}[1][]{colback=GreenLight,colframe=Border,#1}
+\newtcolorbox{warnbox}[1][]{colback=RedLight,colframe=Red,
+ left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm,#1}
+
+\begin{document}
+
+\begin{tikzpicture}[remember picture,overlay]
+\draw[draw=Border,line width=.9pt,rounded corners=1.7mm]
+ ([xshift=1mm,yshift=-1mm]current page.north west)
+ -- ([xshift=-1mm,yshift=-1mm]current page.north east)
+ -- ([xshift=-1mm,yshift=1mm]current page.south east)
+ -- ([xshift=1mm,yshift=1mm]current page.south west)--cycle;
+\fill[Green] ([xshift=1mm,yshift=-1mm]current page.north west)
+ rectangle ([xshift=5.2mm,yshift=1mm]current page.south west);
+\end{tikzpicture}
+
+\vspace*{1mm}\hspace*{6mm}
+{\color{GreenDark}\fontsize{25}{27}\selectfont\bfseries PRESENT DE L'INDICATIU}
+
+\vspace{0.5mm}\hspace*{6mm}
+{\color{Grey}\large Le présent de l'indicatif}
+
+\vspace{2.5mm}\hspace*{6mm}
+\begin{minipage}{0.91\textwidth}
+
+\begin{greenbox}
+\textbf{\color{GreenDark}CONSTRUCCION}\\[1mm]
+\centering
+{\Large \textbf{RADICAL + TERMINASON DEL PRESENT}}\\[1mm]
+\small
+Exemple : \textbf{CANTAR}\\[1mm]
+\textbf{canti}\quad \textbf{cantas}\quad \textbf{canta}\quad
+\textbf{cantam}\quad \textbf{cantatz}\quad \textbf{cantan}
+\end{greenbox}
+
+\vspace{2.5mm}
+\begin{center}
+\begin{tikzpicture}[>=Latex]
+\draw[Ink!65,line width=.8pt] (0,0)--(15.1,0);
+\node[below=2mm] at (2.0,0) {\small PASSAT};
+\node[below=2mm] at (7.5,0) {\small ARA};
+\node[below=2mm] at (13.5,0) {\small FUTUR};
+\draw[Green,line width=2.5pt,->] (6.7,0)--(8.5,0);
+\draw[GreenDark,line width=1.1pt,->] (7.5,1.0)--(7.5,.18);
+\node[above=3.8mm] at (7.5,1.0) {\bfseries\color{GreenDark}ARA};
+\node[above=3mm,align=center,text width=5.8cm] at (7.6,0)
+{\small\bfseries accions en cors, abitualas o veritats generalas};
+\end{tikzpicture}
+\end{center}
+
+\vspace{1.5mm}
+\begin{greenbox}
+\textbf{\color{GreenDark}A QUÉ SERVÍS ?}\\[1mm]
+\begin{itemize}\setlength{\itemsep}{0.4mm}
+\item parlar d'una accion que se passa \textbf{ara} ;
+\item exprimir una \textbf{abituda} o una accion repetida ;
+\item descriure una \textbf{situacion} o un estat ;
+\item exprimir una \textbf{veritat generala}.
+\end{itemize}
+\end{greenbox}
+
+\vspace{2mm}
+\begin{greenbox}
+\textbf{\color{GreenDark}EXEMPLES}\\[1mm]
+\textbf{Parli occitan cada jorn.}\\
+\textbf{Los enfants jogan dins lo jardin.}\\
+\textbf{Uèi, trabalha a l'ostal.}\\
+\textbf{La tèrra vira a l'entorn del Solelh.}
+\end{greenbox}
+
+\vspace{2mm}
+\begin{minipage}{0.485\textwidth}
+\begin{greenbox}[height=3.25cm]
+\textbf{\color{GreenDark}TERMINASONS}\\[1mm]
+Per \textbf{cantar}, un modèl regular :\\[1mm]
+\centering
+\textbf{-i \quad -as \quad -a}\\
+\textbf{-am \quad -atz \quad -an}\\[1mm]
+\raggedright
+Las terminasons pòdon variar segon lo grop e lo vèrb.
+\end{greenbox}
+\end{minipage}\hfill
+\begin{minipage}{0.485\textwidth}
+\begin{warnbox}[height=3.25cm]
+\textbf{\color{Red}ATENCION}\\[1mm]
+Lo present occitan pòt correspondre a de valors diferentas segon lo contèxt.\\[1mm]
+\textit{Parli ara.}\\
+\textit{Parli cada jorn.}
+\end{warnbox}
+\end{minipage}
+
+\vspace{2mm}
+\begin{greenbox}
+\textbf{\color{GreenDark}A RETÉNER}\\[1mm]
+Lo present de l'indicatiu es lo temps de referéncia per parlar del \textbf{moment actual},
+de las abituda e dels faches considerats coma generals. La conjugason depend del \textbf{grop verbal}.
+\end{greenbox}
+
+\vspace{1.5mm}\centering
+{\small\color{Grey}\textbf{Indicis frequents :} ara, uèi, cada jorn, sovent, totjorn, de còps, jamai...}
+
+\vspace{1mm}
+{\scriptsize\color{Grey}Referéncia conjugason : occitan languedocian, graphia classica, vèrb'Òc / Lo Congrès permanent de la lenga occitana.}
+
+\end{minipage}
+\end{document}

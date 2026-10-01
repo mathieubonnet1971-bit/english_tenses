@@ -1,0 +1,132 @@
+
+\documentclass[a4paper,11pt]{article}
+\usepackage{fontspec}
+\setmainfont{Noto Sans}
+\usepackage[french]{babel}
+\usepackage{microtype}
+\usepackage[top=9mm,bottom=8mm,left=11mm,right=11mm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage[most]{tcolorbox}
+\usepackage{ulem}
+\pagestyle{empty}
+
+\definecolor{Violet}{HTML}{7A5AA6}
+\definecolor{VioletDark}{HTML}{563A7A}
+\definecolor{VioletLight}{HTML}{F2ECF8}
+\definecolor{VioletLine}{HTML}{B9A5D0}
+\definecolor{Border}{HTML}{D3C4E2}
+\definecolor{Ink}{HTML}{172A32}
+\definecolor{Grey}{HTML}{64757D}
+\definecolor{Red}{HTML}{D52F35}
+\definecolor{RedLight}{HTML}{FCEBED}
+
+\tcbset{
+ enhanced,
+ boxrule=.6pt,
+ arc=2.8mm,
+ left=3.7mm,right=3.7mm,top=1.75mm,bottom=1.75mm,
+ boxsep=1mm,coltext=Ink
+}
+\newtcolorbox{violetbox}[1][]{colback=VioletLight,colframe=Border,#1}
+\newtcolorbox{warnbox}[1][]{colback=RedLight,colframe=Red,
+ left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm,#1}
+
+\begin{document}
+\begin{tikzpicture}[remember picture,overlay]
+\draw[draw=Border,line width=.9pt,rounded corners=1.7mm]
+ ([xshift=1mm,yshift=-1mm]current page.north west)
+ -- ([xshift=-1mm,yshift=-1mm]current page.north east)
+ -- ([xshift=-1mm,yshift=1mm]current page.south east)
+ -- ([xshift=1mm,yshift=1mm]current page.south west)--cycle;
+\fill[Violet] ([xshift=1mm,yshift=-1mm]current page.north west)
+ rectangle ([xshift=5.2mm,yshift=1mm]current page.south west);
+\end{tikzpicture}
+
+\vspace*{1mm}\hspace*{6mm}
+{\color{VioletDark}\fontsize{25}{27}\selectfont\bfseries CONDITIONAL PERFECT}
+
+\vspace{0.5mm}\hspace*{6mm}
+{\color{Grey}\large The conditional perfect}
+
+\vspace{2.5mm}\hspace*{6mm}
+\begin{minipage}{0.91\textwidth}
+
+\begin{violetbox}
+\textbf{\color{VioletDark}FORM}\\[1mm]
+\centering
+{\Large \textbf{SUBJECT + WOULD + HAVE + PAST PARTICIPLE}}\\[1mm]
+\small
+I would have worked \quad She would have gone \quad They would have finished
+\end{violetbox}
+
+\vspace{2.5mm}
+\begin{center}
+\begin{tikzpicture}[>=Latex]
+\draw[Ink!65,line width=.8pt] (0,0)--(15.1,0);
+\node[below=2mm] at (2.0,0) {\small PAST};
+\node[below=2mm] at (7.5,0) {\small NOW};
+\node[below=2mm] at (13.5,0) {\small FUTURE};
+\draw[Violet,line width=2.5pt,->] (2.5,0)--(6.4,0);
+\draw[VioletDark,line width=1.1pt,->] (7.5,1.0)--(7.5,.18);
+\node[above=3.8mm] at (7.5,1.0) {\bfseries\color{VioletDark}NOW};
+\node[above=3mm,align=center,text width=6.2cm] at (4.5,0)
+{\small\bfseries hypothetical past action or unrealized past result};
+\end{tikzpicture}
+\end{center}
+
+\vspace{1.5mm}
+\begin{violetbox}
+\textbf{\color{VioletDark}WHEN DO WE USE IT?}\\[1mm]
+\begin{itemize}\setlength{\itemsep}{0.4mm}
+\item unrealized or hypothetical actions in the past;
+\item past results that depended on a condition;
+\item regrets and missed possibilities;
+\item hypothetical explanations about what could have happened.
+\end{itemize}
+\end{violetbox}
+
+\vspace{2mm}
+\begin{violetbox}
+\textbf{\color{VioletDark}EXAMPLES}\\[1mm]
+\textbf{If I had known, I would have come.}\\
+\textbf{She would have helped us if she had been there.}\\
+\textbf{I would have liked to stay longer.}\\
+\textbf{They would have finished earlier.}
+\end{violetbox}
+
+\vspace{2mm}
+\begin{minipage}{0.485\textwidth}
+\begin{violetbox}[height=3.15cm]
+\textbf{\color{VioletDark}IF + PAST PERFECT}\\[1mm]
+A common pattern is:\\[1mm]
+\centering
+\textbf{IF + HAD + PAST PARTICIPLE}\\
+$\downarrow$\\
+\textbf{WOULD HAVE + PAST PARTICIPLE}\\[1mm]
+\raggedright
+\textit{If I had known, I would have come.}
+\end{violetbox}
+\end{minipage}\hfill
+\begin{minipage}{0.485\textwidth}
+\begin{warnbox}[height=3.15cm]
+\textbf{\color{Red}ATTENTION}\\[1mm]
+After \textbf{if}, do not normally use \textbf{would have} in this type of conditional.\\[1mm]
+\textbf{If I had known...}\\
+\textcolor{Grey}{not: \sout{If I would have known...}}
+\end{warnbox}
+\end{minipage}
+
+\vspace{2mm}
+\begin{violetbox}
+\textbf{\color{VioletDark}REMEMBER}\\[1mm]
+The conditional perfect looks to the \textbf{past}: it describes what would have happened,
+but did not happen or is presented as hypothetical.
+\end{violetbox}
+
+\vspace{1.5mm}\centering
+{\small\color{Grey}\textbf{Common markers:} if, otherwise, otherwise I would have..., could have, might have, by then...}
+
+\end{minipage}
+\end{document}

@@ -1,0 +1,332 @@
+
+% ============================================================
+% FRENCH TENSES — PLUS-QUE-PARFAIT
+% Version graphique LaTeX/TikZ
+% Compilation : XeLaTeX
+% ============================================================
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[a4paper,top=9mm,bottom=8mm,left=11mm,right=11mm]{geometry}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{microtype}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage[most]{tcolorbox}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[normalem]{ulem}
+
+\setmainfont{Noto Sans}
+\setsansfont{Noto Sans}
+
+% ------------------------------------------------------------
+% PALETTE — PASSÉ = BLEU
+% ------------------------------------------------------------
+\definecolor{Blue}{HTML}{356FA8}
+\definecolor{BlueDark}{HTML}{244D78}
+\definecolor{BlueLight}{HTML}{EAF2F9}
+\definecolor{BlueLine}{HTML}{9BBBD7}
+\definecolor{Border}{HTML}{B9D3E3}
+
+\definecolor{Red}{HTML}{D52F35}
+\definecolor{RedLight}{HTML}{FCEBED}
+\definecolor{Gold}{HTML}{B27A00}
+\definecolor{GoldLight}{HTML}{FFF3D7}
+\definecolor{Ink}{HTML}{172A32}
+\definecolor{Grey}{HTML}{64757D}
+\definecolor{White}{HTML}{FFFFFF}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{3pt}
+
+% ------------------------------------------------------------
+% CADRE
+% ------------------------------------------------------------
+\newcommand{\PageFrame}{%
+\begin{tikzpicture}[remember picture,overlay]
+  \coordinate (A) at ([xshift=8mm,yshift=-8mm]current page.north west);
+  \coordinate (B) at ([xshift=-8mm,yshift=-8mm]current page.north east);
+  \coordinate (C) at ([xshift=-8mm,yshift=8mm]current page.south east);
+  \coordinate (D) at ([xshift=8mm,yshift=8mm]current page.south west);
+  \def\r{1.7mm}
+
+  \draw[Border,line width=.65pt]
+    (A)
+    -- ([xshift=-\r]B)
+    arc[start angle=90,end angle=0,radius=\r]
+    -- ([yshift=\r]C)
+    arc[start angle=0,end angle=-90,radius=\r]
+    -- (D) -- cycle;
+
+  \draw[Blue,line width=3.2mm] (A) -- (D);
+\end{tikzpicture}%
+}
+
+% ------------------------------------------------------------
+% BOÎTES
+% ------------------------------------------------------------
+\tcbset{
+  enhanced,
+  boxrule=.6pt,
+  arc=2.8mm,
+  left=3.7mm,right=3.7mm,top=1.75mm,bottom=1.75mm,
+  boxsep=1mm,
+  coltext=Ink
+}
+
+\newtcolorbox{bluebox}{colback=BlueLight,colframe=BlueLine}
+\newtcolorbox{redbox}{colback=RedLight,colframe=Border}
+\newtcolorbox{whitebox}{colback=White,colframe=Border}
+\newtcolorbox{goldbox}{
+  colback=GoldLight,colframe=GoldLight,
+  boxrule=0pt,arc=2.5mm,
+  left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm
+}
+
+\newcommand{\sectiontitle}[2]{%
+  {\large\bfseries\textcolor{#1}{#2}}%
+}
+
+\newcommand{\pill}[2][BlueLight]{%
+  \tikz[baseline=(X.base)]{
+    \node[
+      fill=#1,rounded corners=2pt,
+      inner xsep=4.2pt,inner ysep=1.6pt,
+      font=\small\bfseries,text=Ink
+    ] (X) {#2};
+  }%
+}
+
+\newcommand{\signalpill}[1]{%
+  \tikz[baseline=(X.base)]{
+    \node[
+      fill=GoldLight,rounded corners=2pt,
+      inner xsep=3.7pt,inner ysep=1.1pt,
+      font=\scriptsize\bfseries,text=Ink
+    ] (X) {#1};
+  }%
+}
+
+% ------------------------------------------------------------
+% TIMELINE
+% ------------------------------------------------------------
+\newcommand{\Timeline}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \draw[-{Latex[length=3mm]},very thick,Ink] (0,0) -- (15.3,0);
+
+  % NOW / present reference
+  \draw[-{Latex[length=3mm,width=2mm]},very thick,Blue]
+    (10.0,1.10) -- (10.0,.10);
+  \node[font=\bfseries\small,text=Blue] at (10.0,1.32) {MAINTENANT};
+
+  % earlier past action
+  \fill[Blue] (4.0,0) circle (3.2pt);
+  \draw[Blue,line width=2.2pt] (4.0,0) -- (6.0,0);
+
+  % later past reference/action
+  \fill[Grey] (6.8,0) circle (3.0pt);
+  \draw[Grey,line width=1.4pt] (6.8,0) -- (8.8,0);
+
+  \draw[Blue!45,dashed,line width=.7pt] (4.0,0.20) -- (6.6,0.20);
+
+  \node[
+    fill=BlueLight,rounded corners=2pt,
+    inner xsep=5pt,inner ysep=2pt,
+    font=\scriptsize\bfseries,text=BlueDark
+  ] at (5.0,.72) {action antérieure};
+
+  \node[font=\scriptsize\bfseries,text=Grey] at (7.8,.62)
+    {autre moment passé};
+
+  \node[font=\scriptsize\bfseries,text=Grey] at (2.2,-.48) {PASSÉ};
+  \node[font=\scriptsize\bfseries,text=Blue] at (10.0,-.48) {PRÉSENT};
+  \node[font=\scriptsize\bfseries,text=Grey] at (13.5,-.48) {FUTUR};
+
+  \draw[-{Latex[length=2.2mm]},BlueDark,thick]
+    (6.2,-.75) -- (6.2,-.08);
+  \node[font=\scriptsize\bfseries,text=BlueDark] at (6.2,-1.00)
+    {avant};
+\end{tikzpicture}%
+}
+
+\begin{document}
+\PageFrame
+
+% ------------------------------------------------------------
+% TITRE
+% ------------------------------------------------------------
+\vspace*{1mm}
+\begin{center}
+  {\fontsize{25}{27}\selectfont\bfseries\textcolor{Ink}{PLUS-QUE-PARFAIT}}
+
+  \vspace{0.75mm}
+  {\large\textcolor{Grey}{Le plus-que-parfait}}
+
+  \vspace{3mm}
+
+  \begin{tcolorbox}[
+    width=.88\textwidth,
+    colback=BlueLight,
+    colframe=BlueLight,
+    boxrule=0pt,
+    arc=3mm,
+    halign=center,
+    top=2.2mm,bottom=2.2mm
+  ]
+    {\large\bfseries\textcolor{BlueDark}{AUXILIAIRE À L'IMPARFAIT + PARTICIPE PASSÉ}}
+    \quad
+    {\small(\textbf{avoir} ou \textbf{être})}
+  \end{tcolorbox}
+\end{center}
+
+\vspace{1mm}
+
+% ------------------------------------------------------------
+% TIMELINE
+% ------------------------------------------------------------
+\begin{bluebox}
+  \sectiontitle{Blue}{La ligne du temps}
+
+  \vspace{0.75mm}
+  \begin{center}
+    \Timeline
+  \end{center}
+
+  \vspace{-1mm}
+  \begin{center}
+    \small
+    Le \textbf{plus-que-parfait} situe une action
+    \textbf{\textcolor{Blue}{avant une autre action ou un autre moment passé}}.
+  \end{center}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% CONSTRUCTION
+% ------------------------------------------------------------
+\begin{bluebox}
+  \sectiontitle{Blue}{Construction}
+
+  \vspace{0.75mm}
+  \begin{tabularx}{\textwidth}{@{}p{.29\textwidth} X@{}}
+    \textbf{Avec avoir} &
+      J'\textbf{avais parlé}. \qquad Nous \textbf{avions fini}.\\
+    \textbf{Avec être} &
+      Elle \textbf{était partie}. \qquad Ils \textbf{étaient arrivés}.
+  \end{tabularx}
+
+  \vspace{0.7mm}
+  \textit{L'auxiliaire est à l'imparfait ; le participe passé reste inchangé avec avoir,
+  sauf cas particuliers d'accord.}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% EXEMPLES / ATTENTION
+% ------------------------------------------------------------
+\begin{minipage}[t]{.485\textwidth}
+\begin{bluebox}
+  \sectiontitle{Blue}{Exemples}
+
+  \vspace{0.75mm}
+  J'\textbf{avais déjà mangé}.\\[-1mm]
+  Elle \textbf{avait terminé} avant midi.\\[-1mm]
+  Nous \textbf{étions partis} quand il a appelé.
+\end{bluebox}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.485\textwidth}
+\begin{redbox}
+  \sectiontitle{Red}{Attention !}
+
+  \vspace{0.75mm}
+  Avec \textbf{être}, le participe passé
+  s'accorde avec le sujet :
+
+  \vspace{0.4mm}
+  Elle était arriv\textbf{ée}.\\[-1mm]
+  Ils étaient arriv\textbf{és}.
+\end{redbox}
+\end{minipage}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% USES
+% ------------------------------------------------------------
+\begin{bluebox}
+  \sectiontitle{Blue}{Quand utilise-t-on le plus-que-parfait ?}
+
+  \vspace{0.75mm}
+  \begin{tabularx}{\textwidth}{@{}p{.31\textwidth} X@{}}
+    \pill{ANTÉRIORITÉ}
+      &
+      Action accomplie avant une autre action passée.
+      \newline \textit{Il avait déjà mangé quand je suis arrivé.}\\[0.7mm]
+
+    \pill{CAUSE DANS LE PASSÉ}
+      &
+      Action antérieure qui explique une situation passée.
+      \newline \textit{Elle était fatiguée parce qu'elle avait peu dormi.}\\[0.7mm]
+
+    \pill{RÉCIT / CHRONOLOGIE}
+      &
+      Permet de revenir sur un événement plus ancien.
+      \newline \textit{Quand nous sommes arrivés, le train était déjà parti.}\\[0.7mm]
+
+    \pill{BILAN D'UNE PÉRIODE PASSÉE}
+      &
+      Ce qui était déjà accompli à un moment du passé.
+      \newline \textit{À midi, j'avais terminé le travail.}
+  \end{tabularx}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% COMPARISON
+% ------------------------------------------------------------
+\begin{whitebox}
+  \sectiontitle{Blue}{Plus-que-parfait ou passé composé ?}
+
+  \vspace{0.65mm}
+  \begin{tabularx}{\textwidth}{@{}p{.45\textwidth} X@{}}
+    \textbf{\textcolor{Blue}{Plus-que-parfait}} &
+      \textbf{\textcolor{Grey}{Passé composé}}\\
+    action antérieure à un repère passé &
+      action passée achevée\\[-.2mm]
+    \textit{J'avais mangé quand il est arrivé.} &
+      \textit{J'ai mangé.}
+  \end{tabularx}
+\end{whitebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% SIGNAL WORDS
+% ------------------------------------------------------------
+\begin{goldbox}
+  \begin{center}
+    {\normalsize\bfseries\textcolor{Gold}{REPÈRES FRÉQUENTS}}
+    \hspace{3mm}
+    \signalpill{déjà}\hspace{1mm}
+    \signalpill{avant}\hspace{1mm}
+    \signalpill{après}\hspace{1mm}
+    \signalpill{quand}
+
+    \vspace{0.75mm}
+
+    \signalpill{lorsque}\hspace{1mm}
+    \signalpill{déjà ... quand}\hspace{1mm}
+    \signalpill{jusqu'alors}\hspace{1mm}
+    \signalpill{à ce moment-là}
+  \end{center}
+\end{goldbox}
+
+\end{document}

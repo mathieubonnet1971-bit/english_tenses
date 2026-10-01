@@ -1,0 +1,91 @@
+
+\documentclass[a4paper,11pt]{article}
+\usepackage{fontspec}
+\setmainfont{Noto Sans}
+\usepackage[french]{babel}
+\usepackage{microtype}
+\usepackage[top=9mm,bottom=8mm,left=11mm,right=11mm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage[most]{tcolorbox}
+\usepackage{ulem}
+\pagestyle{empty}
+
+\definecolor{Blue}{HTML}{356FA8}
+\definecolor{BlueDark}{HTML}{244D78}
+\definecolor{BlueLight}{HTML}{EAF2F9}
+\definecolor{BlueBorder}{HTML}{B9D3E3}
+\definecolor{Violet}{HTML}{7A5AA6}
+\definecolor{VioletDark}{HTML}{563A7A}
+\definecolor{VioletLight}{HTML}{F2ECF8}
+\definecolor{VioletBorder}{HTML}{D3C4E2}
+\definecolor{Neutral}{HTML}{6C7378}
+\definecolor{NeutralDark}{HTML}{42494D}
+\definecolor{NeutralLight}{HTML}{F0F2F3}
+\definecolor{NeutralBorder}{HTML}{C9CED1}
+\definecolor{Ink}{HTML}{172A32}
+\definecolor{Grey}{HTML}{64757D}
+\definecolor{Red}{HTML}{D52F35}
+\definecolor{RedLight}{HTML}{FCEBED}
+
+\tcbset{
+ enhanced,boxrule=.6pt,arc=2.8mm,
+ left=3.7mm,right=3.7mm,top=1.75mm,bottom=1.75mm,
+ boxsep=1mm,coltext=Ink
+}
+\newtcolorbox{bluebox}[1][]{colback=BlueLight,colframe=BlueBorder,#1}
+\newtcolorbox{violetbox}[1][]{colback=VioletLight,colframe=VioletBorder,#1}
+\newtcolorbox{neutralbox}[1][]{colback=NeutralLight,colframe=NeutralBorder,#1}
+\newtcolorbox{warnbox}[1][]{colback=RedLight,colframe=Red,
+ left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm,#1}
+
+\begin{document}
+\begin{tikzpicture}[remember picture,overlay]
+\draw[draw=NeutralBorder,line width=.9pt,rounded corners=1.7mm]
+([xshift=1mm,yshift=-1mm]current page.north west)--([xshift=-1mm,yshift=-1mm]current page.north east)--
+([xshift=-1mm,yshift=1mm]current page.south east)--([xshift=1mm,yshift=1mm]current page.south west)--cycle;
+\fill[Neutral]([xshift=1mm,yshift=-1mm]current page.north west) rectangle ([xshift=5.2mm,yshift=1mm]current page.south west);
+\end{tikzpicture}
+\vspace*{1mm}\hspace*{6mm}{\color{NeutralDark}\fontsize{25}{27}\selectfont\bfseries INFINITIU E PARTICIPI PRESENT}
+\vspace{.5mm}\hspace*{6mm}{\color{Grey}\large L'infinitif et le participe présent}
+\vspace{2.5mm}\hspace*{6mm}\begin{minipage}{.91\textwidth}
+\begin{neutralbox}\textbf{\color{NeutralDark}FORMAS}\\[1mm]\centering
+{\Large\textbf{INFINITIU \quad / \quad PARTICIPI PRESENT}}\\[1mm]
+\small \textit{cantar} \quad / \quad \textit{cantant}
+\end{neutralbox}
+\vspace{2.5mm}\begin{center}\begin{tikzpicture}[>=Latex]
+\draw[Ink!65,line width=.8pt](0,0)--(15.1,0);
+\node[below=2mm]at(3.2,0){\small NOM D'ACCION};\node[below=2mm]at(11.7,0){\small ACCION EN CORS};
+\draw[Neutral,line width=2.5pt,->](2.4,0)--(5.3,0);
+\draw[Neutral,line width=2.5pt,->](9.8,0)--(13.5,0);
+\node[above=3mm,align=center,text width=5.8cm]at(4,0){\small\bfseries infinitiu : nominar l'accion};
+\node[above=3mm,align=center,text width=5.8cm]at(11.7,0){\small\bfseries participi present : caracterizar l'accion};
+\end{tikzpicture}\end{center}
+\vspace{1.5mm}
+\begin{neutralbox}\textbf{\color{NeutralDark}INFINITIU}\\[1mm]
+L'infinitiu es la forma de basa del vèrb : \textbf{cantar, finir, vendre...}\\
+Pòt èsser emplegat après d'autres vèrbs e dins de construccions ont l'accion es considerada coma una nocion o una activitat.
+\end{neutralbox}
+\vspace{2mm}
+\begin{neutralbox}\textbf{\color{NeutralDark}PARTICIPI PRESENT}\\[1mm]
+Lo participi present es una forma en \textbf{-ant} : \textit{cantant, parlant, escrivent...}\\
+Servís notamment a caracterizar una accion o un èstre e pòt participar a de construccions adjectivalas o circonstancialas.
+\end{neutralbox}
+\vspace{2mm}
+\begin{minipage}{.485\textwidth}\begin{neutralbox}[height=3.15cm]
+\textbf{\color{NeutralDark}EXEMPLES}\\[1mm]
+\textit{Ai enveja de cantar.}\\
+\textit{Vesi un òme corrent.}\\
+\textit{Parlant aital, s'es explicat.}
+\end{neutralbox}\end{minipage}\hfill
+\begin{minipage}{.485\textwidth}\begin{warnbox}[height=3.15cm]
+\textbf{\color{Red}ATENCION}\\[1mm]
+Lo participi present es pas l'equivalent sistematic del \textit{-ing} anglés : son usatge e sas construccions dependon de la sintaxi occitana.
+\end{warnbox}\end{minipage}
+\vspace{2mm}\begin{neutralbox}\textbf{\color{NeutralDark}A RETÉNER}\\[1mm]
+L'\textbf{infinitiu} nomina l'accion ; lo \textbf{participi present} permet de la caracterizar o de l'integrar dins una construccion.
+\end{neutralbox}
+\vspace{1.5mm}\centering{\small\color{Grey}\textbf{Exemples de formes :} parlar, finar, vendre / parlant, finissent, vendent...}
+\vspace{1mm}{\scriptsize\color{Grey}Referéncia : occitan languedocian, graphia classica, vèrb'Òc / Lo Congrès.}
+\end{minipage}\end{document}

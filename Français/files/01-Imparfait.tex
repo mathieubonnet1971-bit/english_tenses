@@ -1,0 +1,285 @@
+% ============================================================
+% FRANÇAIS — IMPARFAIT DE L'INDICATIF
+% Version graphique LaTeX/TikZ
+% Compilation : XeLaTeX
+% ============================================================
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[a4paper,top=9mm,bottom=8mm,left=11mm,right=11mm]{geometry}
+\usepackage{fontspec}
+\usepackage[french]{babel}
+\usepackage{microtype}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage[most]{tcolorbox}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[normalem]{ulem}
+
+\setmainfont{Noto Sans}
+\setsansfont{Noto Sans}
+
+% ------------------------------------------------------------
+% PALETTE — PASSÉ = BLEU
+% ------------------------------------------------------------
+\definecolor{Blue}{HTML}{356FA8}
+\definecolor{BlueDark}{HTML}{244D78}
+\definecolor{BlueLight}{HTML}{EAF2F9}
+\definecolor{BlueLine}{HTML}{9BBBD7}
+\definecolor{Red}{HTML}{D52F35}
+\definecolor{RedLight}{HTML}{FCEBED}
+\definecolor{Gold}{HTML}{B27A00}
+\definecolor{GoldLight}{HTML}{FFF3D7}
+\definecolor{Ink}{HTML}{172A32}
+\definecolor{Grey}{HTML}{64757D}
+\definecolor{Border}{HTML}{B9D3E3}
+\definecolor{White}{HTML}{FFFFFF}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{3pt}
+
+% ------------------------------------------------------------
+% CADRE EXTÉRIEUR
+% ------------------------------------------------------------
+\newcommand{\PageFrame}{%
+\begin{tikzpicture}[remember picture,overlay]
+  \coordinate (A) at ([xshift=8mm,yshift=-8mm]current page.north west);
+  \coordinate (B) at ([xshift=-8mm,yshift=-8mm]current page.north east);
+  \coordinate (C) at ([xshift=-8mm,yshift=8mm]current page.south east);
+  \coordinate (D) at ([xshift=8mm,yshift=8mm]current page.south west);
+  \def\r{1.7mm}
+
+  \draw[Border,line width=.65pt]
+    (A)
+    -- ([xshift=-\r]B)
+    arc[start angle=90,end angle=0,radius=\r]
+    -- ([yshift=\r]C)
+    arc[start angle=0,end angle=-90,radius=\r]
+    -- (D) -- cycle;
+
+  \draw[Blue,line width=3.2mm] (A) -- (D);
+\end{tikzpicture}%
+}
+
+% ------------------------------------------------------------
+% BOÎTES
+% ------------------------------------------------------------
+\tcbset{
+  enhanced,
+  boxrule=.6pt,
+  arc=2.8mm,
+  left=4mm,right=4mm,top=2mm,bottom=2mm,
+  coltext=Ink
+}
+
+\newtcolorbox{timelinebox}{colback=White,colframe=BlueLine}
+\newtcolorbox{greenbox}{colback=BlueLight,colframe=BlueLine}
+\newtcolorbox{bluebox}{colback=BlueLight,colframe=Border}
+\newtcolorbox{redbox}{colback=RedLight,colframe=Border}
+\newtcolorbox{whitebox}{colback=White,colframe=Border}
+\newtcolorbox{goldbox}{colback=GoldLight,colframe=GoldLight,boxrule=0pt,arc=2.5mm,left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm}
+
+% ------------------------------------------------------------
+% PETITES ÉTIQUETTES
+% ------------------------------------------------------------
+\newcommand{\pill}[2][BlueLight]{%
+  \tikz[baseline=(X.base)]{\node[fill=#1,rounded corners=2pt,inner xsep=4.2pt,inner ysep=1.6pt,font=\small\bfseries,text=Ink] (X) {#2};}%
+}
+\newcommand{\sectiontitle}[2]{{\large\bfseries\textcolor{#1}{#2}}}
+\newcommand{\signalpill}[1]{%
+  \tikz[baseline=(X.base)]{\node[fill=GoldLight,rounded corners=2pt,inner xsep=3.7pt,inner ysep=1.1pt,font=\scriptsize\bfseries,text=Ink] (X) {#1};}%
+}
+
+% ------------------------------------------------------------
+% ------------------------------------------------------------
+% LIGNE DU TEMPS — IMPARFAIT FRANÇAIS
+% ------------------------------------------------------------
+\newcommand{\Timeline}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \draw[-{Latex[length=3mm]},very thick,Ink] (0,0) -- (15.3,0);
+
+  % repère du passé : l'action se déroule sur une durée passée
+  \draw[-{Latex[length=3mm,width=2mm]},very thick,Blue]
+    (6.6,1.10) -- (6.6,.10);
+  \node[font=\bfseries\small,text=Blue] at (6.6,1.32) {MOMENT PASSÉ};
+
+  % zone de durée / arrière-plan
+  \draw[Blue,line width=3.2pt] (3.0,0) -- (7.8,0);
+  \fill[Blue] (3.0,0) circle (2.1pt);
+  \fill[Blue] (7.8,0) circle (2.1pt);
+
+  \node[font=\scriptsize\bfseries,text=Grey] at (2.2,-.48) {PASSÉ};
+  \node[font=\scriptsize\bfseries,text=Blue] at (6.6,-.48) {IMPARFAIT};
+  \node[font=\scriptsize\bfseries,text=Grey] at (13.3,-.48) {FUTUR};
+
+  \node[fill=BlueLight,rounded corners=2pt,inner xsep=5pt,inner ysep=2pt,font=\scriptsize\bfseries,text=BlueDark]
+    at (5.0,.72) {durée / habitude dans le passé};
+\end{tikzpicture}%
+}
+
+\begin{document}
+\PageFrame
+
+% ------------------------------------------------------------
+% TITRE
+% ------------------------------------------------------------
+\vspace*{1mm}
+\begin{center}
+  {\fontsize{25}{27}\selectfont\bfseries\textcolor{Ink}{IMPARFAIT}}
+
+  \vspace{0.75mm}
+  {\large\textcolor{Grey}{L'imparfait de l'indicatif}}
+
+  \vspace{3mm}
+
+  \begin{tcolorbox}[
+    width=.88\textwidth,
+    colback=BlueLight,
+    colframe=BlueLight,
+    boxrule=0pt,
+    arc=3mm,
+    halign=center,
+    top=2.2mm,bottom=2.2mm
+  ]
+    {\large\bfseries\textcolor{BlueDark}{NOUS AU PRÉSENT + TERMINAISONS DE L'IMPARFAIT}}
+    \quad
+    {\small\textit{ex. : parlons $\rightarrow$ parl- + ais, ais, ait, ions, iez, aient}}
+  \end{tcolorbox}
+\end{center}
+
+\vspace{1mm}
+
+% ------------------------------------------------------------
+% TIMELINE
+% ------------------------------------------------------------
+\begin{timelinebox}
+  \sectiontitle{Blue}{La ligne du temps}
+
+  \vspace{0.75mm}
+  \begin{center}
+    \Timeline
+  \end{center}
+
+  \vspace{-1mm}
+  \begin{center}
+    \small
+    L'\textbf{imparfait} situe une action ou un état dans le \textbf{passé},
+    en insistant souvent sur sa \textbf{durée, son habitude ou son contexte}.
+  \end{center}
+\end{timelinebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% ------------------------------------------------------------
+% FORMATION
+% ------------------------------------------------------------
+\begin{greenbox}
+  \sectiontitle{Blue}{Formation — exemple : parler}
+
+  \vspace{0.75mm}
+  \begin{center}
+    \begin{tabular}{@{}c@{\qquad}c@{\qquad}c@{\qquad}c@{\qquad}c@{\qquad}c@{}}
+      je & tu & il / elle / on & nous & vous & ils / elles\\[-.2mm]
+      \textcolor{Blue}{parlais} & \textcolor{Blue}{parlais} & \textcolor{Blue}{parlait} &
+      \textcolor{Blue}{parlions} & \textcolor{Blue}{parliez} & \textcolor{Blue}{parlaient}
+    \end{tabular}
+  \end{center}
+
+  \vspace{0.5mm}
+  \begin{center}
+    \small\textcolor{Grey}{On part en général de la forme \textbf{nous} au présent, puis on ajoute :}
+    \quad
+    \textbf{-ais \; -ais \; -ait \; -ions \; -iez \; -aient}
+  \end{center}
+\end{greenbox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% ------------------------------------------------------------
+% USES
+% ------------------------------------------------------------
+\begin{greenbox}
+  \sectiontitle{Blue}{Quand utilise-t-on l'imparfait ?}
+
+  \vspace{0.75mm}
+  \begin{tabularx}{\textwidth}{@{}p{.31\textwidth} X@{}}
+    \pill{HABITUDE PASSÉE}
+      & Action répétée ou habituelle dans le passé.\newline
+        \textit{Quand j'étais enfant, je jouais dehors.}\\[0.7mm]
+    \pill{DURÉE / ACTION EN COURS}
+      & Action qui était en train de se dérouler à un moment passé.\newline
+        \textit{Je lisais quand tu es arrivé.}\\[0.7mm]
+    \pill{DESCRIPTION / CONTEXTE}
+      & Cadre, décor, état ou situation dans un récit au passé.\newline
+        \textit{Il faisait froid et la rue était déserte.}\\[0.7mm]
+    \pill{ÉTAT / SITUATION DURABLE}
+      & Situation qui durait ou caractérisait une période passée.\newline
+        \textit{Elle habitait alors à Albi.}
+  \end{tabularx}
+\end{greenbox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% ------------------------------------------------------------
+% EXAMPLES
+% ------------------------------------------------------------
+\begin{bluebox}
+  \sectiontitle{Blue}{Exemples}
+
+  \vspace{0.75mm}
+  \begin{tabularx}{\textwidth}{@{}X@{\hspace{7mm}}X@{}}
+    \textbf{Je travaillais tous les samedis.}
+    & \textbf{Il pleuvait ce matin-là.}\\[-.5mm]
+    \textit{Habitude passée.}
+    & \textit{Contexte / description.}\\[0.7mm]
+    \textbf{Nous marchions dans la forêt.}
+    & \textbf{Elle habitait dans le Tarn.}\\[-.5mm]
+    \textit{Action en cours dans le passé.}
+    & \textit{Situation durable dans le passé.}
+  \end{tabularx}
+\end{bluebox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% ------------------------------------------------------------
+% POINT DE VIGILANCE
+% ------------------------------------------------------------
+\begin{redbox}
+  \textcolor{Red}{\bfseries !\quad À retenir :}
+  l'imparfait présente souvent le passé comme \textbf{en cours, habituel ou descriptif}.
+  Il s'oppose notamment au passé composé, qui présente plus facilement un fait comme \textbf{achevé ou ponctuel}.
+\end{redbox}
+
+\vspace{1.35mm}
+
+% ------------------------------------------------------------
+% ------------------------------------------------------------
+% MOTS REPÈRES
+% ------------------------------------------------------------
+\begin{goldbox}
+  \begin{center}
+    {\normalsize\bfseries\textcolor{Gold}{MOTS REPÈRES}}
+    \hspace{3mm}
+    \signalpill{souvent}\hspace{1mm}
+    \signalpill{toujours}\hspace{1mm}
+    \signalpill{habituellement}\hspace{1mm}
+    \signalpill{autrefois}\hspace{1mm}
+    \signalpill{à l'époque}
+
+    \vspace{0.75mm}
+
+    \signalpill{chaque jour}\hspace{1mm}
+    \signalpill{tous les jours}\hspace{1mm}
+    \signalpill{quand j'étais...}\hspace{1mm}
+    \signalpill{pendant que}
+  \end{center}
+\end{goldbox}
+
+\end{document}

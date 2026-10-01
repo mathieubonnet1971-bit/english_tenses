@@ -1,0 +1,99 @@
+
+\documentclass[a4paper,11pt]{article}
+\usepackage{fontspec}
+\setmainfont{Noto Sans}
+\usepackage[french]{babel}
+\usepackage{microtype}
+\usepackage[top=9mm,bottom=8mm,left=11mm,right=11mm]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+\usepackage[most]{tcolorbox}
+\usepackage{ulem}
+\pagestyle{empty}
+
+\definecolor{Blue}{HTML}{356FA8}
+\definecolor{BlueDark}{HTML}{244D78}
+\definecolor{BlueLight}{HTML}{EAF2F9}
+\definecolor{BlueBorder}{HTML}{B9D3E3}
+\definecolor{Violet}{HTML}{7A5AA6}
+\definecolor{VioletDark}{HTML}{563A7A}
+\definecolor{VioletLight}{HTML}{F2ECF8}
+\definecolor{VioletBorder}{HTML}{D3C4E2}
+\definecolor{Neutral}{HTML}{6C7378}
+\definecolor{NeutralDark}{HTML}{42494D}
+\definecolor{NeutralLight}{HTML}{F0F2F3}
+\definecolor{NeutralBorder}{HTML}{C9CED1}
+\definecolor{Ink}{HTML}{172A32}
+\definecolor{Grey}{HTML}{64757D}
+\definecolor{Red}{HTML}{D52F35}
+\definecolor{RedLight}{HTML}{FCEBED}
+
+\tcbset{
+ enhanced,boxrule=.6pt,arc=2.8mm,
+ left=3.7mm,right=3.7mm,top=1.75mm,bottom=1.75mm,
+ boxsep=1mm,coltext=Ink
+}
+\newtcolorbox{bluebox}[1][]{colback=BlueLight,colframe=BlueBorder,#1}
+\newtcolorbox{violetbox}[1][]{colback=VioletLight,colframe=VioletBorder,#1}
+\newtcolorbox{neutralbox}[1][]{colback=NeutralLight,colframe=NeutralBorder,#1}
+\newtcolorbox{warnbox}[1][]{colback=RedLight,colframe=Red,
+ left=2.7mm,right=2.7mm,top=1.25mm,bottom=1.25mm,#1}
+
+\begin{document}
+\begin{tikzpicture}[remember picture,overlay]
+\draw[draw=NeutralBorder,line width=.9pt,rounded corners=1.7mm]
+([xshift=1mm,yshift=-1mm]current page.north west)--([xshift=-1mm,yshift=-1mm]current page.north east)--
+([xshift=-1mm,yshift=1mm]current page.south east)--([xshift=1mm,yshift=1mm]current page.south west)--cycle;
+\fill[Neutral]([xshift=1mm,yshift=-1mm]current page.north west) rectangle ([xshift=5.2mm,yshift=1mm]current page.south west);
+\end{tikzpicture}
+\vspace*{1mm}\hspace*{6mm}{\color{NeutralDark}\fontsize{25}{27}\selectfont\bfseries PARTICIPI PASSAT}
+\vspace{.5mm}\hspace*{6mm}{\color{Grey}\large Le participe passé}
+\vspace{2.5mm}\hspace*{6mm}\begin{minipage}{.91\textwidth}
+\begin{neutralbox}\textbf{\color{NeutralDark}FORMAS}\\[1mm]\centering
+{\Large\textbf{PARTICIPI PASSAT DEL VÈRB}}\\[1mm]
+\small Exemples : \textit{cantar → cantat \quad faire → fach \quad venir → vengut}
+\end{neutralbox}
+\vspace{2.5mm}\begin{center}\begin{tikzpicture}[>=Latex]
+\draw[Ink!65,line width=.8pt](0,0)--(15.1,0);
+\node[below=2mm]at(2.2,0){\small PASSAT};\node[below=2mm]at(7.5,0){\small ARA};\node[below=2mm]at(13.5,0){\small FUTUR};
+\draw[Neutral,line width=2.5pt](2.5,0)--(5.4,0);
+\draw[NeutralDark,line width=1.1pt,->](7.5,1)--(7.5,.18);
+\node[above=3.8mm]at(7.5,1){\bfseries\color{NeutralDark}ARA};
+\node[above=3mm,align=center,text width=6.2cm]at(4,0){\small\bfseries accion acabada / resultat};
+\end{tikzpicture}\end{center}
+\vspace{1.5mm}\begin{neutralbox}\textbf{\color{NeutralDark}A QUÉ SERVÍS ?}\\[1mm]
+\begin{itemize}\setlength{\itemsep}{.4mm}
+\item formar de nombrosas formas verbalas compostas ;
+\item exprimir lo resultat o l'estat resultant d'una accion ;
+\item èsser emplegat coma adjectiu dins certanas construccions ;
+\item s'acordar en genre e en nombre quand la construccion o l'usatge o demanda.
+\end{itemize}\end{neutralbox}
+\vspace{2mm}\begin{neutralbox}\textbf{\color{NeutralDark}EXEMPLES}\\[1mm]
+\textbf{Ai cantat tota la serada.}\\
+\textbf{Es vengut fòrça lèu.}\\
+\textbf{La pòrta es tampada.}\\
+\textbf{Las letras son escritas.}
+\end{neutralbox}
+\vspace{2mm}
+\begin{minipage}{.485\textwidth}\begin{neutralbox}[height=3.15cm]
+\textbf{\color{NeutralDark}FORMAS IRREGULARAS}\\[1mm]
+\centering
+\textbf{èsser → estat}\\
+\textbf{aver → agut}\\
+\textbf{faire → fach}\\
+\textbf{dire → dich}\\
+\textbf{venir → vengut}
+\end{neutralbox}\end{minipage}\hfill
+\begin{minipage}{.485\textwidth}\begin{warnbox}[height=3.15cm]
+\textbf{\color{Red}ATENCION}\\[1mm]
+Lo participi passat pòt variar en \textbf{genre e nombre}.\\[1mm]
+Ex. \textit{vengut / venguda / venguts / vengudas}.
+\end{warnbox}\end{minipage}
+\vspace{2mm}\begin{neutralbox}\textbf{\color{NeutralDark}A RETÉNER}\\[1mm]
+Lo participi passat es una forma clau de la conjugason occitana : participa a las \textbf{formas compostas}
+e pòt tanben aver una valor adjectivala.
+\end{neutralbox}
+\vspace{1.5mm}\centering{\small\color{Grey}\textbf{Exemples :} cantat, finit, vendut, fach, dich, escrit, vengut...}
+\vspace{1mm}{\scriptsize\color{Grey}Referéncia : occitan languedocian, graphia classica, vèrb'Òc / Lo Congrès.}
+\end{minipage}\end{document}
